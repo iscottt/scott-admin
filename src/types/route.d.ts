@@ -26,6 +26,7 @@ declare namespace AuthRoute {
     | 'form_basic'
     | 'form_custom'
     | 'form_dynamic'
+    | 'form_table'
     | 'plugin'
     | 'plugin_map'
     | 'plugin_video'

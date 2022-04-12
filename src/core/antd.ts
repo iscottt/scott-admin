@@ -1,19 +1,5 @@
 import type { App } from 'vue';
-import {
-  Modal,
-  Table,
-  Menu,
-  Input,
-  Form,
-  Card,
-  Checkbox,
-  Radio,
-  Col,
-  Row,
-  Select,
-  DatePicker,
-  Button,
-} from 'ant-design-vue';
+import { Modal, Table, Menu, Input, Form, Card, Checkbox, Radio, Col, Row, Select, DatePicker } from 'ant-design-vue';
 import { AButton } from '@/components/common/button/index';
 
 import 'ant-design-vue/dist/antd.css';
@@ -26,7 +12,6 @@ export function setupAntd(app: App<Element>) {
     .use(Input)
     .use(Modal)
     .use(Table)
-    .use(Button)
     .use(Menu)
     .use(Card)
     .use(Checkbox)

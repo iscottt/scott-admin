@@ -131,6 +131,16 @@ const routes: AuthRoute.Route[] = [
           icon: 'mdi:table-large',
         },
       },
+      {
+        name: 'form_table',
+        path: '/form/table',
+        component: 'self',
+        meta: {
+          title: '查询表格',
+          requiresAuth: true,
+          icon: 'mdi:table-large',
+        },
+      },
     ],
     meta: {
       title: '组件示例',
