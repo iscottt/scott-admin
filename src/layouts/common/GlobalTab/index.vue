@@ -1,5 +1,5 @@
 <template>
-  <div class="global-tab bg-[#FFFFFF] flex-y-center w-full h-44px pl-16px">
+  <div class="global-tab">
     <div ref="bsWrapper" class="flex-1-hidden h-full">
       <better-scroll ref="bsScroll" :options="{ scrollX: true, scrollY: false, click: canClick }">
         <tab-detail @scroll="handleScroll" />
@@ -58,5 +58,7 @@ init();
 <style scoped>
 .global-tab {
   box-shadow: 0 1px 2px rgb(0 21 41 / 8%);
+  height: 44px;
+  @apply bg-white flex items-center justify-between w-full px-6;
 }
 </style>

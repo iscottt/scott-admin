@@ -1,12 +1,12 @@
 <template>
   <div v-if="showTooltip">
     <Tooltip :placement="placement" :title="tooltipContent" trigger="hover">
-      <div class="flex-center h-full cursor-pointer hover:bg-[#f6f6f6] dark:hover:bg-[#333]" :class="contentClass">
+      <div class="tooltip-content" :class="contentClass">
         <slot></slot>
       </div>
     </Tooltip>
   </div>
-  <div v-else class="flex-center cursor-pointer hover:bg-[#f6f6f6] dark:hover:bg-[#333]" :class="contentClass">
+  <div v-else class="content" :class="contentClass">
     <slot></slot>
   </div>
 </template>
@@ -31,4 +31,11 @@ const props = withDefaults(defineProps<Props>(), {
 
 const showTooltip = computed(() => Boolean(props.tooltipContent));
 </script>
-<style scoped></style>
+<style scoped lang="less">
+.tooltip-content {
+  @apply flex items-center justify-center h-full cursor-pointer hover:bg-gray-200 px-3;
+}
+.content {
+  @apply flex items-center justify-center cursor-pointer hover:bg-gray-200;
+}
+</style>

@@ -1,8 +1,9 @@
 import { createApp } from 'vue';
-import { setupAntd, setupAssets } from '@/core';
+import { setupAssets } from '@/core';
 import App from './App.vue';
 import { setupRouter } from './router';
 import { setupStore } from '@/store';
+import 'ant-design-vue/dist/antd.css';
 
 async function setupApp() {
   // 引入静态资源
@@ -10,9 +11,6 @@ async function setupApp() {
   const app = createApp(App);
   // 挂载pinia状态
   setupStore(app);
-
-  // 引入Ant Design Vue
-  setupAntd(app);
 
   // 挂载路由
   await setupRouter(app);

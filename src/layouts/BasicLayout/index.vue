@@ -1,23 +1,26 @@
 <template>
-  <Layout class="flex h-full overflow-hidden">
+  <a-layout class="layout">
     <!--      侧边菜单栏start-->
     <global-sider :collapsed="collapsed" />
     <!--      侧边菜单栏end-->
-    <Layout>
+    <a-layout>
       <GlobalHeader v-model:collapsed="collapsed" />
-      <Layout.Content>
+      <a-layout-content>
         <GlobalTab />
         <GlobalContent />
-      </Layout.Content>
+      </a-layout-content>
       <GlobalFooter />
-    </Layout>
-  </Layout>
+    </a-layout>
+  </a-layout>
 </template>
 
 <script setup lang="ts">
-import { Layout } from 'ant-design-vue';
 import { ref } from 'vue';
 import { GlobalSider, GlobalHeader, GlobalFooter, GlobalTab, GlobalContent } from '../common';
 const collapsed = ref<boolean>(false);
 </script>
-<style scoped></style>
+<style scoped lang="less">
+.layout {
+  @apply flex h-full overflow-hidden;
+}
+</style>

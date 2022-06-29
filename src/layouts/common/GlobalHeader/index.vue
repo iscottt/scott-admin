@@ -1,11 +1,10 @@
 <template>
-  <Layout.Header class="!bg-[#FFFFFF] !pr-10px !pl-10px">
-    <div class="w-full h-64px flex items-center justify-start bg-[#ffffff]">
-      <div v-if="isMobile" class="leading-70px text-30px font-bin align-center overflow-hidden">Scott Admin</div>
-      <div v-if="!isMobile" class="cursor-pointer" @click="emit('update:collapsed', !collapsed)">
-        <component class="text-20px pl-20px pr-20px" :is="collapsed ? MenuUnfoldOutlined : MenuFoldOutlined" />
+  <a-layout-header class="ant-header">
+    <div class="header-container">
+      <div v-if="!isMobile" class="collapsed" @click="emit('update:collapsed', !collapsed)">
+        <component class="text-lg pl-20px pr-20px" :is="collapsed ? MenuUnfoldOutlined : MenuFoldOutlined" />
       </div>
-      <div class="p-0 flex-1 h-full flex items-center justify-start pl-21px">
+      <div class="breadcrumb-container">
         <Breadcrumb>
           <template v-for="routeItem in route.matched" :key="routeItem.name">
             <Breadcrumb.Item>
@@ -16,17 +15,17 @@
           </template>
         </Breadcrumb>
       </div>
-      <div class="flex items-center justify-end">
+      <div class="actions-container">
         <!-- <div class="item">
         <img src="@/assets/images/layout/notice.png" alt="" />
       </div>
       <div class="item">
         <img src="@/assets/images/layout/setting.png" alt="" />
       </div> -->
-        <div class="w-40px h-40px flex-center cursor-pointer" @click="logout">
+        <div class="action" @click="logout">
           <Tooltip>
             <template #title>退出登录</template>
-            <img class="w-20px h-20px" src="@/assets/images/layout/logout.png" alt="logout" />
+            <img class="w-5 h-5" src="@/assets/images/layout/logout.png" alt="logout" />
           </Tooltip>
         </div>
         <div
@@ -38,12 +37,12 @@
         </div>
       </div>
     </div>
-  </Layout.Header>
+  </a-layout-header>
 </template>
 
 <script lang="ts" setup>
 import { QuestionCircleOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue';
-import { message, Modal, Layout } from 'ant-design-vue';
+import { message, Modal } from 'ant-design-vue';
 import { computed, createVNode } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useAppStore } from '@/store';
@@ -82,3 +81,27 @@ const logout = () => {
   });
 };
 </script>
+
+<style lang="less" scoped>
+.ant-header {
+  @apply !bg-white !px-10;
+}
+.header-container {
+  @apply w-full h-full flex items-center justify-start bg-white;
+  .collapsed {
+    @apply cursor-pointer flex content-center justify-center;
+  }
+  .mobile-title {
+    @apply leading-10 text-xl font-bin content-center overflow-hidden;
+  }
+  .breadcrumb-container {
+    @apply p-0 flex-1 h-full flex items-center justify-start pl-5;
+  }
+  .actions-container {
+    @apply flex items-center w-40 h-full justify-end;
+    .action {
+      @apply h-full flex items-center justify-center cursor-pointer mr-2;
+    }
+  }
+}
+</style>

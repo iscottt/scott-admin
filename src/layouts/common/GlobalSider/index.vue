@@ -1,9 +1,9 @@
 <template>
-  <Layout.Sider :collapsed="props.collapsed" :width="asiderWidth" :trigger="null" collapsible>
+  <a-layout-sider :collapsed="props.collapsed" :width="asiderWidth" :trigger="null" collapsible>
     <div class="flex-col-stretch h-full">
-      <global-logo :show-title="props.collapsed" :collapsed="props.collapsed" class="h-56px" />
+      <global-logo :show-title="props.collapsed" :collapsed="props.collapsed" />
       <div class="flex-1-hidden">
-        <Menu
+        <a-menu
           v-model:open-keys="state.openKeys"
           v-model:selected-keys="state.selectedKeys"
           mode="inline"
@@ -15,10 +15,10 @@
           <template v-for="item in menus" :key="item.routePath">
             <MenuItem :menu-info="item" />
           </template>
-        </Menu>
+        </a-menu>
       </div>
     </div>
-  </Layout.Sider>
+  </a-layout-sider>
 </template>
 
 <script setup lang="ts">
@@ -27,7 +27,6 @@ import MenuItem from './menuItem.vue';
 import { computed, reactive, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useRouteStore } from '@/store';
-import { Menu, Layout } from 'ant-design-vue';
 import { useRouterPush } from '@/composables';
 import { getActiveKeyPathsOfMenus } from '@/utils';
 const props = defineProps({

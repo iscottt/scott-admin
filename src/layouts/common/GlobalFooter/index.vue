@@ -1,10 +1,12 @@
 <template>
-  <Layout.Footer class="flex-center">
+  <a-layout-footer class="ant-footer">
     <span>Copyright ©2022 Scott Admin</span>
-  </Layout.Footer>
+  </a-layout-footer>
 </template>
 
-<script setup lang="ts">
-import { Layout } from 'ant-design-vue';
-</script>
-<style scoped></style>
+<script setup lang="ts"></script>
+<style scoped lang="less">
+.ant-footer {
+  @apply flex items-center justify-center;
+}
+</style>

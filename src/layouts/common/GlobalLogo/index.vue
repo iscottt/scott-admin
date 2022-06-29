@@ -1,7 +1,7 @@
 <template>
-  <router-link :to="routeHomePath" class="flex-center w-full nowrap-hidden">
-    <div v-if="!showTitle" class="leading-70px text-30px font-bin align-center overflow-hidden">Scott Admin</div>
-    <h2 v-show="showTitle" class="pl-8px mb-0 text-30px font-bold text-primary transition duration-300 ease-in-out">S</h2>
+  <router-link :to="routeHomePath" class="title-content">
+    <div v-if="!showTitle" class="title">Scott Admin</div>
+    <h2 v-show="showTitle" class="mobile-title">S</h2>
   </router-link>
 </template>
 
@@ -17,4 +17,14 @@ defineProps<Props>();
 
 const routeHomePath = routePath('root');
 </script>
-<style scoped></style>
+<style scoped lang="less">
+.title-content {
+  @apply flex content-center justify-center w-full whitespace-nowrap py-2 box-border;
+}
+.title {
+  @apply text-3xl font-bin text-center overflow-hidden;
+}
+.mobile-title {
+  @apply pl-8 mb-0 text-2xl font-bold transition duration-300 ease-in-out;
+}
+</style>

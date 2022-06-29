@@ -1,9 +1,10 @@
 import type { ConfigEnv, PluginOption } from 'vite';
 import DefineOptions from 'unplugin-vue-define-options/vite';
 import vue from './vue';
-import windicss from './windicss';
 import mock from './mock';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import unplugin from './unplugin';
+import autoImport from './autoImport';
 
 /**
  *	vite插件
@@ -16,6 +17,6 @@ export function setupVitePlugins(
   _srcPath: string,
   _viteEnv: ImportMetaEnv
 ): (PluginOption | PluginOption[])[] {
-  const plugins = [vue, windicss, mock, DefineOptions(), vueJsx()];
+  const plugins = [vue, mock, DefineOptions(), vueJsx(), unplugin, autoImport];
   return plugins;
 }
