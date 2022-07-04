@@ -1,5 +1,5 @@
 <template>
-  <Dropdown class="w-full" :trigger="['contextmenu']">
+  <Dropdown class="w-full flex items-center justify-center" :trigger="['contextmenu']">
     <slot></slot>
     <template #overlay>
       <a-menu>

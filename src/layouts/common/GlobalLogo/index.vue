@@ -25,6 +25,6 @@ const routeHomePath = routePath('root');
   @apply text-3xl font-bin text-center overflow-hidden;
 }
 .mobile-title {
-  @apply pl-8 mb-0 text-2xl font-bold transition duration-300 ease-in-out;
+  @apply text-3xl font-bin transition duration-300 ease-in-out text-blue-600;
 }
 </style>

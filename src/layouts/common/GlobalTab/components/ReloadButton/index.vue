@@ -1,6 +1,6 @@
 <template>
   <HoverContainer class="button-container" tooltip-content="重新加载" placement="bottom" @click="handleRefresh">
-    <ReloadOutlined class="text-lg" :class="{ 'animate-spin': loading }" />
+    <ReloadOutlined class="text-base" :class="{ 'animate-spin': loading }" />
   </HoverContainer>
 </template>
 
@@ -23,6 +23,7 @@ function handleRefresh() {
 </script>
 <style scoped lang="less">
 .button-container {
-  @apply h-full flex items-center justify-center;
+  height: 34px;
+  @apply flex items-center justify-center;
 }
 </style>

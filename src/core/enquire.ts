@@ -8,6 +8,7 @@ export const AppDeviceEnquire = () => {
   onMounted(() => {
     const app = useAppStore();
     deviceEnquire((deviceType: EnumDeviceType) => {
+      console.log('deviceType', deviceType);
       switch (deviceType) {
         case EnumDeviceType.desktop:
           app.setDeviceType(EnumDeviceType.desktop);
