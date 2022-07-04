@@ -50,6 +50,7 @@ function init() {
   tab.iniTabStore(route);
 }
 
+// 监听路由实时改变tab初始值
 watch(
   () => route.path,
   () => {

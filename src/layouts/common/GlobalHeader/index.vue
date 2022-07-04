@@ -1,9 +1,11 @@
 <template>
   <a-layout-header :class="isMobile ? 'ant-header-mobile' : 'ant-header'">
     <div class="header-container">
+      <!-- 收缩菜单的按钮 -->
       <div v-if="!isMobile" class="collapsed" @click="emit('update:collapsed', !collapsed)">
         <component class="text-lg pl-20px pr-20px" :is="collapsed ? MenuUnfoldOutlined : MenuFoldOutlined" />
       </div>
+      <!-- 面包屑 -->
       <div class="breadcrumb-container">
         <Breadcrumb>
           <template v-for="routeItem in route.matched" :key="routeItem.name">
@@ -15,6 +17,7 @@
           </template>
         </Breadcrumb>
       </div>
+      <!-- 右侧操作栏 -->
       <div class="actions-container">
         <div class="action" @click="logout">
           <Tooltip>

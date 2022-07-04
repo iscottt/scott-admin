@@ -39,19 +39,21 @@ const props = defineProps({
 const asiderWidth = computed(() => (props.collapsed ? 80 : 256));
 const routeStore = useRouteStore();
 const { routerPush } = useRouterPush();
-// 当前路由
 const currentRoute = useRoute();
 
+// 菜单值初始化
 const state = reactive({
   openKeys: ['/dashboard'] as any,
   selectedKeys: [currentRoute.fullPath] as any,
 });
 
+// 菜单项点击事件
 const clickMenuItem = ({ key }) => {
   if (key === currentRoute.name) return;
   routerPush(key);
 };
 
+// 菜单list初始化
 const menus = computed(() => {
   return [...routeStore.menus].filter((n) => !n.hideInMenu) || [];
 });
