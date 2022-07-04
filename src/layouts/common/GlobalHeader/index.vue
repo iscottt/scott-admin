@@ -77,7 +77,7 @@ const logout = () => {
 
 <style lang="less" scoped>
 .ant-header {
-  @apply !bg-white !px-10;
+  @apply !bg-white !px-6;
 }
 .ant-header-mobile {
   @apply !bg-white !px-0;
@@ -94,9 +94,12 @@ const logout = () => {
     @apply p-0 flex-1 h-full flex items-center justify-start pl-5;
   }
   .actions-container {
-    @apply flex items-center w-40 h-full justify-end pr-2;
+    @apply flex items-center w-40 h-full justify-end pr-3;
     .action {
       @apply h-full flex items-center justify-center cursor-pointer mr-2;
+      &:first-of-type {
+        margin: 0;
+      }
     }
   }
   .mobile-menu {
