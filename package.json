@@ -54,13 +54,14 @@
     "qs": "^6.10.3",
     "rollup": "^2.70.1",
     "soybean-admin-tab": "^1.2.3",
-    "tailwindcss": "^3.1.4",
     "typescript": "^4.5.4",
     "ua-parser-js": "^1.0.2",
     "unplugin-vue-components": "^0.19.3",
     "unplugin-vue-define-options": "^0.6.0",
     "vite": "^2.9.0",
     "vite-plugin-mock": "^2.9.6",
-    "vue-tsc": "^0.29.8"
+    "vite-plugin-windicss": "^1.8.6",
+    "vue-tsc": "^0.29.8",
+    "windicss": "^3.5.6"
   }
 }

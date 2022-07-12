@@ -63,7 +63,6 @@ export const useAuthStore = defineStore('auth-store', {
 
         // 跳转登录后的地址
         toLoginRedirect();
-
         // 登录成功弹出欢迎提示
         notification.success({
           message: '登录成功!',

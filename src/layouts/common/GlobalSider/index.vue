@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider :collapsed="props.collapsed" :width="asiderWidth" :trigger="null" collapsible>
+  <a-layout-sider class="sider-container" :collapsed="props.collapsed" :width="asiderWidth" :trigger="null" collapsible>
     <div class="flex-col-stretch h-full">
       <global-logo :show-title="props.collapsed" :collapsed="props.collapsed" />
       <div class="flex-1-hidden">
@@ -70,4 +70,8 @@ watch(
   }
 );
 </script>
-<style scoped></style>
+<style scoped lang="less">
+  .sider-container{
+    @apply fixed top-0 left-0 bottom-0;
+  }
+</style>

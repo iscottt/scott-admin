@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'p-3': showPadding }" class="content-container">
+  <div :class="{ 'p-3': showPadding }" class="content-container bg-content">
     <router-view v-slot="{ Component, route }">
       <transition name="fade-slide" mode="out-in" appear>
         <keep-alive :include="['/code']">
@@ -24,6 +24,6 @@ const app = useAppStore();
 
 <style scoped lang="less">
 .content-container {
-  @apply h-full bg-content transition duration-300 ease-in-out box-border;
+  @apply h-full transition duration-300 ease-in-out box-border overflow-visible;
 }
 </style>

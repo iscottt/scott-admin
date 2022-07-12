@@ -2,6 +2,9 @@ import type { Router } from 'vue-router';
 import { useTitle } from '@vueuse/core';
 import { createPermissionGuard } from './permission';
 import NProgress from 'nprogress'; // progress bar
+NProgress.configure({
+  showSpinner: false,
+});
 
 /**
  * 路由守卫函数

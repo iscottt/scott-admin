@@ -1,15 +1,12 @@
 <template>
-  <div class="relative flex-center h-full" :style="{ backgroundColor: '#E0E8FD' }">
-    <a-card
-      :bordered="false"
-      class="relative overflow-hidden flex-center z-4 shadow-gray-500\/50 !rounded-20px w-400px"
-    >
+  <div class="login-container" :style="{ backgroundColor: '#E0E8FD' }">
+    <a-card :bordered="false" class="login-card">
       <div class="w-360px">
         <header class="flex-y-center justify-between">
           <div class="leading-70px text-30px font-bin align-center overflow-hidden">Scott Admin</div>
           <div class="font-title text-24px text-blue-500">{{ activeModule.label }}</div>
         </header>
-        <main class="pt-24px pb-24px">
+        <main class="py-20px">
           <transition name="fade-slide" mode="out-in" appear>
             <component :is="activeModule.component" v-model:loading="loginLoading" />
           </transition>
@@ -57,7 +54,13 @@ const activeModule = computed(() => {
 });
 const loginLoading = ref<boolean>(false);
 </script>
-<style scoped>
+<style scoped lang="less">
+.login-container {
+  @apply relative flex-center wh-full overflow-hidden;
+  .login-card {
+    @apply relative overflow-hidden flex-center z-4 shadow-gray-500/50 !rounded-20px w-400px;
+  }
+}
 .circular {
   height: 42px;
   width: 42px;

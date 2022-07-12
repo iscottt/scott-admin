@@ -19,11 +19,11 @@
     <!-- 右侧内容 start-->
     <a-layout>
       <GlobalHeader v-model:collapsed="collapsed" />
-      <a-layout-content>
-        <GlobalTab />
+      <GlobalTab />
+      <a-layout-content class="layout-content">
         <GlobalContent />
+        <GlobalFooter />
       </a-layout-content>
-      <GlobalFooter />
     </a-layout>
     <!-- 右侧内容 end-->
   </a-layout>
@@ -59,6 +59,10 @@ watch(
 </script>
 <style scoped lang="less">
 .layout {
-  @apply flex h-full overflow-hidden;
+  @apply flex h-full;
+}
+.ant-layout-content {
+  min-height: auto !important;
+  @apply pl-256px pt-108px;
 }
 </style>

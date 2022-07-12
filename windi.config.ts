@@ -45,8 +45,8 @@ export default defineConfig({
   theme: {
     extend: {
       fontFamily: {
-        'title': 'TITLE',
-        'bin': 'BIN',
+        title: 'TITLE',
+        bin: 'BIN',
       },
       colors: {
         primary: 'var(--primary-color)',
@@ -73,6 +73,7 @@ export default defineConfig({
       backgroundColor: {
         dark: '#18181c',
         'dark-base': '#101014',
+        content: '#f7f9f8',
       },
       textColor: {
         'black-base': '#333639',

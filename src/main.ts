@@ -4,6 +4,7 @@ import App from './App.vue';
 import { setupRouter } from './router';
 import { setupStore } from '@/store';
 import 'ant-design-vue/dist/antd.css';
+import 'virtual:windi.css'
 
 async function setupApp() {
   // 引入静态资源

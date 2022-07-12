@@ -23,4 +23,8 @@ AppDeviceEnquire();
   font-family: TITLE;
   src: url(./assets/fonts/title.TTF);
 }
+body,
+html {
+  /* overflow: hidden; */
+}
 </style>

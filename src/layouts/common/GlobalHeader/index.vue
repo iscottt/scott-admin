@@ -63,12 +63,11 @@ const logout = () => {
     icon: createVNode(QuestionCircleOutlined),
     onOk: () => {
       message.success('成功退出登录', 1);
+      localStorage.clear();
       setTimeout(() => {
-        router
-          .replace({
-            name: 'login',
-          })
-          .finally(() => location.reload());
+        router.replace({
+          name: 'login',
+        });
       }, 1000);
     },
   });
@@ -77,7 +76,7 @@ const logout = () => {
 
 <style lang="less" scoped>
 .ant-header {
-  @apply !bg-white !px-6;
+  @apply !bg-white !px-2 fixed z-10 top-0 left-256px right-0;
 }
 .ant-header-mobile {
   @apply !bg-white !px-0;

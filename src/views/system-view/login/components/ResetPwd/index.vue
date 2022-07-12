@@ -66,4 +66,8 @@ function handleSubmit(e: MouseEvent) {
     });
 }
 </script>
-<style scoped></style>
+<style scoped>
+.ant-form-item {
+  margin-bottom: 17px !important;
+}
+</style>
