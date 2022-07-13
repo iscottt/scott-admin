@@ -79,7 +79,8 @@ const logout = () => {
 
 <style lang="less" scoped>
 .ant-header {
-  @apply !bg-white !px-2 fixed z-10 top-0 left-256px right-0 transition-all duration-[0.2s];
+  box-shadow: 0 1px 2px #00152914;
+  @apply !bg-white !px-2 fixed h-46px z-11 top-0 left-256px right-0 transition-all duration-[0.2s];
 }
 .ant-header-mobile {
   @apply !bg-white h-46px !px-0 fixed z-10 top-0 left-0 right-0;

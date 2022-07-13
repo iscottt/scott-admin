@@ -74,7 +74,7 @@ init();
 .global-tab {
   box-shadow: 0 1px 2px rgb(0 21 41 / 8%);
   height: 44px;
-  @apply bg-white z-10 flex items-end justify-between right-0 px-2 fixed top-64px left-256px box-border transition-all duration-[0.2s];
+  @apply bg-white z-10 flex items-end justify-between right-0 px-2 fixed top-46px left-256px box-border transition-all duration-[0.2s];
 }
 
 .global-tab-mobile {

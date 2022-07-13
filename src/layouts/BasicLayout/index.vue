@@ -73,7 +73,7 @@ watch(
 .ant-layout-content {
   min-height: auto !important;
   transition: padding-left 0.2s;
-  @apply pl-256px pt-108px;
+  @apply pl-256px pt-90px;
 }
 /deep/ .ant-back-top {
   @apply right-30px;
