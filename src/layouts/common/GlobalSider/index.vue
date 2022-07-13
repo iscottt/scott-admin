@@ -71,7 +71,12 @@ watch(
 );
 </script>
 <style scoped lang="less">
-  .sider-container{
-    @apply fixed top-0 left-0 bottom-0;
+.sider-container {
+  @apply fixed top-0 left-0 bottom-0;
+}
+@media (max-width: 768px) {
+  .sider-container {
+    @apply static;
   }
+}
 </style>

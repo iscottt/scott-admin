@@ -1,5 +1,8 @@
 <template>
-  <div :class="isMobile ? 'global-tab-mobile' : 'global-tab'">
+  <div
+    :class="isMobile ? 'global-tab-mobile' : 'global-tab'"
+    :style="isMobile ? {} : { left: `${!collapsed ? 256 : 80}px !important` }"
+  >
     <div ref="bsWrapper" class="flex-1-hidden h-full">
       <better-scroll ref="bsScroll" :options="{ scrollX: true, scrollY: false, click: canClick }">
         <tab-detail @scroll="handleScroll" />
@@ -19,6 +22,11 @@ import { TabDetail, ReloadButton } from './components';
 import BetterScroll from '@/components/custom/BetterScroll.vue';
 import { EnumDeviceType } from '@/enum';
 
+// 定义组件props
+interface Props {
+  collapsed: Boolean;
+}
+defineProps<Props>();
 const route = useRoute();
 const tab = useTabStore();
 const deviceInfo = useDeviceInfo();
@@ -66,12 +74,12 @@ init();
 .global-tab {
   box-shadow: 0 1px 2px rgb(0 21 41 / 8%);
   height: 44px;
-  @apply bg-white z-10 flex items-end justify-between right-0 px-2 fixed top-64px left-256px box-border;
+  @apply bg-white z-10 flex items-end justify-between right-0 px-2 fixed top-64px left-256px box-border transition-all duration-[0.2s];
 }
 
 .global-tab-mobile {
   box-shadow: 0 1px 2px rgb(0 21 41 / 8%);
   height: 44px;
-  @apply bg-white flex items-end justify-between w-full px-0;
+  @apply bg-white z-10 flex items-end justify-between w-full px-0 fixed top-46px left-0 right-0;
 }
 </style>

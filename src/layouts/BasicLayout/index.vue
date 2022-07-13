@@ -19,10 +19,18 @@
     <!-- 右侧内容 start-->
     <a-layout>
       <GlobalHeader v-model:collapsed="collapsed" />
-      <GlobalTab />
-      <a-layout-content class="layout-content">
+      <GlobalTab v-model:collapsed="collapsed" />
+      <a-layout-content
+        class="layout-content"
+        :style="isMobile ? {} : { paddingLeft: `${!collapsed ? 256 : 80}px !important` }"
+      >
         <GlobalContent />
         <GlobalFooter />
+        <a-back-top>
+          <div class="back-top">
+            <ArrowUpOutlined />
+          </div>
+        </a-back-top>
       </a-layout-content>
     </a-layout>
     <!-- 右侧内容 end-->
@@ -33,6 +41,7 @@
 import { EnumDeviceType } from '@/enum';
 import { useAppStore } from '@/store';
 import { ref, watch } from 'vue';
+import { ArrowUpOutlined } from '@ant-design/icons-vue';
 import { GlobalSider, GlobalHeader, GlobalFooter, GlobalTab, GlobalContent } from '../common';
 const collapsed = ref<boolean>(false);
 const app = useAppStore();
@@ -63,6 +72,20 @@ watch(
 }
 .ant-layout-content {
   min-height: auto !important;
+  transition: padding-left 0.2s;
   @apply pl-256px pt-108px;
+}
+/deep/ .ant-back-top {
+  @apply right-30px;
+}
+.back-top {
+  @apply flex items-center justify-center bg-white shadow text-black h-full rounded-full text-18px;
+}
+
+@media (max-width: 768px) {
+  .ant-layout-content {
+    min-height: auto !important;
+    @apply pl-0 pt-90px;
+  }
 }
 </style>

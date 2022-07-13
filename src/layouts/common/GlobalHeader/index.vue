@@ -1,5 +1,8 @@
 <template>
-  <a-layout-header :class="isMobile ? 'ant-header-mobile' : 'ant-header'">
+  <a-layout-header
+    :class="isMobile ? 'ant-header-mobile' : 'ant-header'"
+    :style="isMobile ? {} : { left: `${!collapsed ? 256 : 80}px !important` }"
+  >
     <div class="header-container">
       <!-- 收缩菜单的按钮 -->
       <div v-if="!isMobile" class="collapsed" @click="emit('update:collapsed', !collapsed)">
@@ -26,7 +29,7 @@
           </Tooltip>
         </div>
         <div v-if="isMobile" class="mobile-menu" @click="emit('update:collapsed', !collapsed)">
-          <img class="w-20px h-20px" src="@/assets/images/layout/menu.png" alt="menu" />
+          <img class="w-27px h-27px ml-2" src="@/assets/images/layout/menu.png" alt="menu" />
         </div>
       </div>
     </div>
@@ -76,10 +79,10 @@ const logout = () => {
 
 <style lang="less" scoped>
 .ant-header {
-  @apply !bg-white !px-2 fixed z-10 top-0 left-256px right-0;
+  @apply !bg-white !px-2 fixed z-10 top-0 left-256px right-0 transition-all duration-[0.2s];
 }
 .ant-header-mobile {
-  @apply !bg-white !px-0;
+  @apply !bg-white h-46px !px-0 fixed z-10 top-0 left-0 right-0;
 }
 .header-container {
   @apply w-full h-full flex items-center justify-start bg-white;

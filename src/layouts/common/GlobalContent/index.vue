@@ -24,6 +24,6 @@ const app = useAppStore();
 
 <style scoped lang="less">
 .content-container {
-  @apply h-full transition duration-300 ease-in-out box-border overflow-visible;
+  @apply h-full transition duration-300 ease-in-out box-border overflow-y-visible overflow-x-hidden;
 }
 </style>
