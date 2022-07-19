@@ -12,3 +12,7 @@ html, body, #app {
   font-family: TITLE;
   src: url(../assets/fonts/title.TTF);
 }
+.ant-message-custom-content {
+  display: flex;
+  align-items: center;
+}

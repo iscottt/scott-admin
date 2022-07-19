@@ -28,7 +28,8 @@
         <GlobalFooter />
         <a-back-top>
           <div class="back-top">
-            <ArrowUpOutlined />
+            <!-- <EpTop /> -->
+            <img src="@/assets/images/layout/top.svg" alt="" />
           </div>
         </a-back-top>
       </a-layout-content>
@@ -40,8 +41,6 @@
 <script setup lang="ts">
 import { EnumDeviceType } from '@/enum';
 import { useAppStore } from '@/store';
-import { ref, watch } from 'vue';
-import { ArrowUpOutlined } from '@ant-design/icons-vue';
 import { GlobalSider, GlobalHeader, GlobalFooter, GlobalTab, GlobalContent } from '../common';
 const collapsed = ref<boolean>(false);
 const app = useAppStore();
@@ -79,7 +78,8 @@ watch(
   @apply right-30px;
 }
 .back-top {
-  @apply flex items-center justify-center bg-white shadow text-black h-full rounded-full text-18px;
+  box-shadow: 0 2px 8px rgb(50 50 50 / 4%);
+  @apply flex items-center justify-center bg-white text-black h-full rounded-full text-18px;
 }
 
 @media (max-width: 768px) {

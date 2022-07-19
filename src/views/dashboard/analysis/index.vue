@@ -10,7 +10,7 @@ import { message, notification } from 'ant-design-vue';
 
 const a = ref(123);
 const doSome = () => {
-  message.success('123123', 0);
+  message.warning('123123', 0);
   notification.open({
     message: 'Notification Title',
     description:
@@ -21,4 +21,3 @@ const doSome = () => {
   });
 };
 </script>
-<style scoped></style>
