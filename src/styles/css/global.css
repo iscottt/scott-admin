@@ -16,3 +16,45 @@ html, body, #app {
   display: flex;
   align-items: center;
 }
+
+/* 隐藏滚动条 */
+body::-webkit-scrollbar{
+  display: none; /* Chrome Safari */
+}
+
+/* reset ant design styles */
+.ant-menu-inline .ant-menu-selected::after, .ant-menu-inline .ant-menu-item-selected::after{
+  content: none !important;
+}
+.ant-menu-sub.ant-menu-inline{
+  background: #fff !important;
+}
+.ant-menu:not(.ant-menu-inline-collapsed) .ant-menu-item,
+.ant-menu:not(.ant-menu-inline-collapsed) .ant-menu-submenu-title{
+  width: calc(100% - 30px) !important;
+  @apply !ml-15px;
+}
+.ant-menu:not(.ant-menu-inline-collapsed) .ant-menu-submenu:hover .ant-menu-submenu-title ,
+.ant-menu:not(.ant-menu-inline-collapsed) .ant-menu-submenu-selected .ant-menu-submenu-title {
+  width: calc(100% - 30px) !important;
+  @apply !rounded-md box-border !bg-content ml-15px !font-medium text-black;
+}
+.ant-menu-title-content{
+  transition: none !important;
+}
+.ant-menu-item-selected:not(.ant-menu-submenu),
+.ant-menu .ant-menu-inline .ant-menu-item-selected{
+  transition: none !important;
+  @apply text-white !bg-transparent font-medium;
+}
+.ant-menu .ant-menu-inline .ant-menu-item-selected .ant-menu-title-content{
+  @apply  !bg-blue-500 !rounded-md pl-8 box-border -ml-8;
+}
+
+.ant-menu-inline, .ant-menu-vertical, .ant-menu-vertical-left{
+  border: none !important;
+}
+.ant-menu-item-selected:not(.ant-menu-submenu){
+  width: calc(100% - 30px) !important;
+  @apply  !bg-blue-500 !rounded-md box-border;
+}

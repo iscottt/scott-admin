@@ -72,14 +72,14 @@ init();
 </script>
 <style scoped>
 .global-tab {
-  box-shadow: 0 1px 2px rgb(0 21 41 / 8%);
-  height: 44px;
-  @apply bg-white z-10 flex items-end justify-between right-0 px-2 fixed top-46px left-256px box-border transition-all duration-[0.2s];
+  box-shadow: 0px 15px 6px -15px rgba(0, 0, 0, 0.1);
+  height: 46px;
+  @apply bg-white z-10 flex items-end justify-between right-0 px-2 fixed top-64px left-256px box-border transition-all duration-[0.2s];
 }
 
 .global-tab-mobile {
   box-shadow: 0 1px 2px rgb(0 21 41 / 8%);
-  height: 44px;
-  @apply bg-white z-10 flex items-end justify-between w-full px-0 fixed top-46px left-0 right-0;
+  height: 46px;
+  @apply bg-white z-10 flex items-end justify-between w-full px-0 fixed top-64px left-0 right-0;
 }
 </style>

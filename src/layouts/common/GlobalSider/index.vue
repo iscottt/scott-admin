@@ -7,7 +7,6 @@
           v-model:open-keys="state.openKeys"
           v-model:selected-keys="state.selectedKeys"
           mode="inline"
-          theme="dark"
           :collapsed="props.collapsed"
           collapsible
           @click="clickMenuItem"
@@ -72,7 +71,7 @@ watch(
 </script>
 <style scoped lang="less">
 .sider-container {
-  @apply fixed top-0 left-0 bottom-0;
+  @apply fixed top-0 left-0 bottom-0 bg-white z-12;
 }
 @media (max-width: 768px) {
   .sider-container {

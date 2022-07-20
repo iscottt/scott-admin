@@ -74,6 +74,7 @@ export default defineConfig({
         dark: '#18181c',
         'dark-base': '#101014',
         content: '#f7f9f8',
+        'main': '#f3f7fe',
       },
       textColor: {
         'black-base': '#333639',

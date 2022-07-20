@@ -22,12 +22,36 @@
       </div>
       <!-- 右侧操作栏 -->
       <div class="actions-container">
-        <div class="action" @click="logout">
+        <!-- <div class="action" @click="logout">
           <Tooltip>
             <template #title>退出登录</template>
             <img class="w-5 h-5" src="@/assets/images/layout/logout.png" alt="logout" />
           </Tooltip>
-        </div>
+        </div> -->
+        <a-dropdown>
+          <div class="userinfo">
+            <div class="avatar">
+              <img src="https://gd-hbimg.huaban.com/c06f36af307897793abc4d44368b8be337f3a5c5d741-yvh53F_sq180" />
+            </div>
+            <div class="info">
+              <span>Scott</span>
+              <span>iscottt@163.com</span>
+            </div>
+          </div>
+          <template #overlay>
+            <a-menu @click="handleMenuClick">
+              <a-menu-item key="logout">
+                <div class="dropdown-item"><MdiExitToApp class="mr-2" />退出登录</div>
+              </a-menu-item>
+              <a-menu-item>
+                <div class="dropdown-item"><EpSetting class="mr-2" />个人设置</div>
+              </a-menu-item>
+              <a-menu-item>
+                <div class="dropdown-item"><MdiSquareEditOutline class="mr-2" />修改密码</div>
+              </a-menu-item>
+            </a-menu>
+          </template>
+        </a-dropdown>
         <div v-if="isMobile" class="mobile-menu" @click="emit('update:collapsed', !collapsed)">
           <img class="w-27px h-27px ml-2" src="@/assets/images/layout/menu.png" alt="menu" />
         </div>
@@ -58,7 +82,13 @@ const route = useRoute();
 const isMobile = computed(() => {
   return app.device === EnumDeviceType.mobile;
 });
-
+const handleMenuClick = (e) => {
+  switch (e.key) {
+    case 'logout':
+      logout();
+      break;
+  }
+};
 // 退出登录
 const logout = () => {
   Modal.confirm({
@@ -79,11 +109,11 @@ const logout = () => {
 
 <style lang="less" scoped>
 .ant-header {
-  box-shadow: 0 1px 2px #00152914;
-  @apply !bg-white !px-2 fixed h-46px z-11 top-0 left-256px right-0 transition-all duration-[0.2s];
+  box-shadow: 0 1px 4px #00152914;
+  @apply !bg-white !px-2 fixed z-11 top-0 left-256px right-0 transition-all duration-[0.2s];
 }
 .ant-header-mobile {
-  @apply !bg-white h-46px !px-0 fixed z-10 top-0 left-0 right-0;
+  @apply !bg-white !px-0 fixed z-10 top-0 left-0 right-0;
 }
 .header-container {
   @apply w-full h-full flex items-center justify-start bg-white;
@@ -104,9 +134,30 @@ const logout = () => {
         margin: 0;
       }
     }
+    .userinfo {
+      @apply px-2 h-50px flex items-center justify-evenly cursor-pointer;
+      &:hover {
+        @apply bg-gray-100 rounded-md;
+      }
+      .avatar {
+        @apply w-36px h-36px rounded-full overflow-hidden shadow-xl shadow-light-700 mr-2;
+      }
+      .info {
+        @apply h-50px flex flex-col items-start justify-center;
+        span {
+          @apply text-sm font-medium;
+          &:last-of-type {
+            @apply text-gray-400 font-normal;
+          }
+        }
+      }
+    }
   }
   .mobile-menu {
-    @apply w-7 h-7 flex items-center justify-center cursor-pointer;
+    @apply w-7 h-7 flex items-start justify-start cursor-pointer text-sm;
   }
+}
+.dropdown-item {
+  @apply flex items-center justify-start;
 }
 </style>

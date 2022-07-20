@@ -1,7 +1,8 @@
 <template>
   <div>
     <a-button @click="doSome">{{ a }}</a-button>
-    <div class="h-1000px w-200px bg-black"></div>
+    <div class="h-1000px w-200px bg-content"></div>
+    
   </div>
 </template>
 

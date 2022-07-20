@@ -1,22 +1,22 @@
 <template>
   <a-form ref="formRef" :model="model" :rules="rules">
     <a-form-item name="phone">
-      <a-input size="large" v-model:value="model.phone" placeholder="手机号码" />
+      <a-input class="!rounded-md" size="large" v-model:value="model.phone" placeholder="手机号码" />
     </a-form-item>
     <a-form-item name="code">
       <div class="flex-y-center w-full">
-        <a-input size="large" v-model:value="model.code" placeholder="验证码" />
+        <a-input class="!rounded-md" size="large" v-model:value="model.code" placeholder="验证码" />
         <div class="w-18px"></div>
-        <a-button size="large" :disabled="isCounting" :loading="smsLoading" @click="handleSmsCode">
+        <a-button size="large" class="!rounded-md" :disabled="isCounting" :loading="smsLoading" @click="handleSmsCode">
           {{ label }}
         </a-button>
       </div>
     </a-form-item>
     <a-form-item name="pwd">
-      <a-input size="large" v-model:value="model.pwd" placeholder="密码" />
+      <a-input class="!rounded-md" size="large" v-model:value="model.pwd" placeholder="密码" />
     </a-form-item>
     <a-form-item name="confirmPwd">
-      <a-input size="large" v-model:value="model.confirmPwd" placeholder="确认密码" />
+      <a-input class="!rounded-md" size="large" v-model:value="model.confirmPwd" placeholder="确认密码" />
     </a-form-item>
     <div class="pt-10px flex justify-evenly">
       <a-button size="large" type="primary" class="mr-20px" block @click="handleSubmit">确定</a-button>

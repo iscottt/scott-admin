@@ -1,7 +1,13 @@
 <template>
   <a-form ref="formRef" :model="model" :rules="rules" :wrapper-col="{ span: 24 }" class="relative !pb-60px">
     <a-form-item name="user" has-feedback>
-      <a-input v-model:value="model.phone" size="large" :style="{ width: '100%' }" placeholder="请输入用户名" />
+      <a-input
+        v-model:value="model.phone"
+        size="large"
+        class="!rounded-md"
+        :style="{ width: '100%' }"
+        placeholder="请输入用户名"
+      />
     </a-form-item>
     <a-form-item name="password" has-feedback>
       <a-input
@@ -10,6 +16,7 @@
         placeholder="请输入密码"
         :style="{ width: '100%' }"
         size="large"
+        class="!rounded-md"
         @keydown.enter="handleSubmit"
       />
     </a-form-item>
