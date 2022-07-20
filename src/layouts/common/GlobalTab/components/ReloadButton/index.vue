@@ -23,7 +23,7 @@ function handleRefresh() {
 </script>
 <style scoped lang="less">
 .button-container {
-  height: 34px;
+  height: 46px;
   @apply flex items-center justify-center;
 }
 </style>
