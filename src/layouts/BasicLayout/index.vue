@@ -8,7 +8,7 @@
       v-if="isMobile"
       width="256px"
       :closable="false"
-      :drawerStyle="{ background: '#041527' }"
+      :drawerStyle="{ background: '#ffffff' }"
       :bodyStyle="{ padding: 0 }"
       v-model:visible="collapsed"
       placement="right"
@@ -85,7 +85,7 @@ watch(
 @media (max-width: 768px) {
   .ant-layout-content {
     min-height: auto !important;
-    @apply pl-0 pt-90px;
+    @apply pl-0 pt-110px;
   }
 }
 </style>

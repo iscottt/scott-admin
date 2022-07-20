@@ -40,6 +40,7 @@ declare module '@vue/runtime-core' {
     IconEpTop: typeof import('~icons/ep/top')['default']
     ImageVerify: typeof import('./src/components/custom/ImageVerify.vue')['default']
     MdiExitToApp: typeof import('~icons/mdi/exit-to-app')['default']
+    MdiMenu: typeof import('~icons/mdi/menu')['default']
     MdiSquareEditOutline: typeof import('~icons/mdi/square-edit-outline')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

@@ -30,10 +30,10 @@
         </div> -->
         <a-dropdown>
           <div class="userinfo">
-            <div class="avatar">
+            <div class="avatar" :class="isMobile ? '!mr-0' : ''">
               <img src="https://gd-hbimg.huaban.com/c06f36af307897793abc4d44368b8be337f3a5c5d741-yvh53F_sq180" />
             </div>
-            <div class="info">
+            <div class="info" v-if="!isMobile">
               <span>Scott</span>
               <span>iscottt@163.com</span>
             </div>
@@ -49,12 +49,15 @@
               <a-menu-item>
                 <div class="dropdown-item"><MdiSquareEditOutline class="mr-2" />修改密码</div>
               </a-menu-item>
+              <a-menu-item v-if="isMobile" key="menu">
+                <div class="dropdown-item"><MdiMenu class="mr-2" />打开菜单</div>
+              </a-menu-item>
             </a-menu>
           </template>
         </a-dropdown>
-        <div v-if="isMobile" class="mobile-menu" @click="emit('update:collapsed', !collapsed)">
-          <img class="w-27px h-27px ml-2" src="@/assets/images/layout/menu.png" alt="menu" />
-        </div>
+        <!-- <div  class="mobile-menu" @click="emit('update:collapsed', !collapsed)">
+          <img class="w-24px h-24px ml-2" src="@/assets/images/layout/menu.png" alt="menu" />
+        </div> -->
       </div>
     </div>
   </a-layout-header>
@@ -67,13 +70,13 @@ import { computed, createVNode } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useAppStore } from '@/store';
 import { EnumDeviceType } from '@/enum';
-import { Breadcrumb, Tooltip } from 'ant-design-vue';
+import { Breadcrumb } from 'ant-design-vue';
 
 // 定义组件props
 interface Props {
   collapsed: Boolean;
 }
-defineProps<Props>();
+const props = defineProps<Props>();
 const emit = defineEmits(['update:collapsed']);
 const app = useAppStore();
 const router = useRouter();
@@ -86,6 +89,9 @@ const handleMenuClick = (e) => {
   switch (e.key) {
     case 'logout':
       logout();
+      break;
+    case 'menu':
+      emit('update:collapsed', !props.collapsed);
       break;
   }
 };
@@ -127,7 +133,7 @@ const logout = () => {
     @apply p-0 flex-1 h-full flex items-center justify-start pl-5;
   }
   .actions-container {
-    @apply flex items-center w-40 h-full justify-end pr-3;
+    @apply flex items-center h-full justify-end pr-3;
     .action {
       @apply h-full flex items-center justify-center cursor-pointer mr-2;
       &:first-of-type {
