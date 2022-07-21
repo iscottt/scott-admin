@@ -23,37 +23,45 @@ body::-webkit-scrollbar{
 }
 
 /* reset ant design styles */
+/* 去掉默认的右边蓝色边框 */
 .ant-menu-inline .ant-menu-selected::after, .ant-menu-inline .ant-menu-item-selected::after{
   content: none !important;
 }
+/* 子集容器背景色重置 */
 .ant-menu-sub.ant-menu-inline{
   background: #fff !important;
 }
+/* 子级菜单选中效果 */
 .ant-menu:not(.ant-menu-inline-collapsed) .ant-menu-item,
 .ant-menu:not(.ant-menu-inline-collapsed) .ant-menu-submenu-title{
   width: calc(100% - 30px) !important;
   @apply !ml-15px;
 }
-.ant-menu:not(.ant-menu-inline-collapsed) .ant-menu-submenu:hover .ant-menu-submenu-title ,
-.ant-menu:not(.ant-menu-inline-collapsed) .ant-menu-submenu-selected .ant-menu-submenu-title {
+/* 父级菜单选中和hover效果 */
+.ant-menu:not(.ant-menu-inline-collapsed) .ant-menu-submenu .ant-menu-submenu-title:hover,
+.ant-menu:not(.ant-menu-inline-collapsed) .ant-menu-submenu-selected>.ant-menu-submenu-title:nth-of-type(1){
   width: calc(100% - 30px) !important;
   @apply !rounded-md box-border !bg-content ml-15px !font-medium text-black;
 }
+/* 去掉动画 */
 .ant-menu-title-content{
   transition: none !important;
 }
+/* 选中背景色 */
 .ant-menu-item-selected:not(.ant-menu-submenu),
 .ant-menu .ant-menu-inline .ant-menu-item-selected{
   transition: none !important;
   @apply text-white !bg-transparent font-medium;
 }
+/* 选中背景色 */
 .ant-menu .ant-menu-inline .ant-menu-item-selected .ant-menu-title-content{
   @apply  !bg-blue-500 !rounded-md pl-8 box-border -ml-8;
 }
-
+/* 去掉边框 */
 .ant-menu-inline, .ant-menu-vertical, .ant-menu-vertical-left{
   border: none !important;
 }
+/* 单个菜单选中背景色 */
 .ant-menu-item-selected:not(.ant-menu-submenu){
   width: calc(100% - 30px) !important;
   @apply  !bg-blue-500 !rounded-md box-border;
