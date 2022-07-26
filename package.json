@@ -21,7 +21,7 @@
     "pinia": "^2.0.12",
     "unplugin-auto-import": "^0.7.1",
     "vite-plugin-style-import": "^2.0.0",
-    "vue": "^3.2.25",
+    "vue": "^3.2.31",
     "vue-global-api": "^0.4.1",
     "vue-router": "^4.0.14",
     "vue-types": "^4.1.1"

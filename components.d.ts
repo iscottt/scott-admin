@@ -24,6 +24,7 @@ declare module '@vue/runtime-core' {
     AntDesignAccountBookOutlined: typeof import('~icons/ant-design/account-book-outlined')['default']
     ApiSelect: typeof import('./src/components/core/schema-form/src/components/ApiSelect.vue')['default']
     ASelect: typeof import('ant-design-vue/es')['Select']
+    ASpace: typeof import('ant-design-vue/es')['Space']
     ASubMenu: typeof import('ant-design-vue/es')['SubMenu']
     ATable: typeof import('ant-design-vue/es')['Table']
     BasicArrow: typeof import('./src/components/common/basic-arrow/index.vue')['default']

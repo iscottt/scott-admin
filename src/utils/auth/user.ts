@@ -16,27 +16,12 @@ export function removeToken() {
   removeLocal(EnumStorageKey.token);
 }
 
-/** 获取refresh token */
-export function getRefreshToken() {
-  return getLocal<string>(EnumStorageKey['refresh-token']) || '';
-}
-
-/** 设置refresh token */
-export function setRefreshToken(token: string) {
-  setLocal(EnumStorageKey['refresh-token'], token);
-}
-
-/** 去除refresh token */
-export function removeRefreshToken() {
-  removeLocal(EnumStorageKey['refresh-token']);
-}
-
 /** 获取用户信息 */
 export function getUserInfo() {
   const emptyInfo: Auth.UserInfo = {
-    userId: '',
-    userName: '',
-    userPhone: '',
+    id: '',
+    username: '',
+    email: '',
     userRole: 'visitor',
   };
   const userInfo: Auth.UserInfo = getLocal<Auth.UserInfo>(EnumStorageKey['user-info']) || emptyInfo;
@@ -56,6 +41,5 @@ export function removeUserInfo() {
 /** 去除用户相关缓存 */
 export function clearAuthStorage() {
   removeToken();
-  removeRefreshToken();
   removeUserInfo();
 }

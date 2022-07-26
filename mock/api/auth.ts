@@ -2,7 +2,6 @@ import type { MockMethod } from 'vite-plugin-mock';
 
 const token: ApiAuth.Token = {
   token: '__TEMP_TOKEN__',
-  refreshToken: '__TEMP_REFRESH_TOKEN__',
 };
 
 const apis: MockMethod[] = [
@@ -43,22 +42,22 @@ const apis: MockMethod[] = [
     },
   },
   // 获取用户信息(请求头携带token)
-  {
-    url: '/mock/getUserInfo',
-    method: 'get',
-    response: (): Service.MockServiceResult<ApiAuth.UserInfo> => {
-      return {
-        retCode: 200,
-        retMessage: 'ok',
-        retData: {
-          userId: '0',
-          userName: 'Soybean',
-          userPhone: '15170283876',
-          userRole: 'super',
-        },
-      };
-    },
-  },
+  // {
+  //   url: '/mock/getUserInfo',
+  //   method: 'get',
+  //   response: (): Service.MockServiceResult<ApiAuth.UserInfo> => {
+  //     return {
+  //       retCode: 200,
+  //       retMessage: 'ok',
+  //       retData: {
+  //         userId: '0',
+  //         userName: 'Soybean',
+  //         userPhone: '15170283876',
+  //         userRole: 'super',
+  //       },
+  //     };
+  //   },
+  // },
   {
     url: '/mock/testToken',
     method: 'post',

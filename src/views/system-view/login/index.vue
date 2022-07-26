@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { EnumLoginModule } from '@/enum';
-import { LoginBg, PwdLogin, ResetPwd } from './components';
+import { LoginBg, PwdLogin, Register, ResetPwd } from './components';
 
 interface LoginModule {
   key: EnumType.LoginModuleKey;
@@ -42,6 +42,7 @@ const props = defineProps<Props>();
 const modules: LoginModule[] = [
   { key: 'pwd-login', label: EnumLoginModule['pwd-login'], component: PwdLogin },
   { key: 'reset-pwd', label: EnumLoginModule['reset-pwd'], component: ResetPwd },
+  { key: 'register', label: EnumLoginModule['register'], component: Register },
 ];
 
 const activeModule = computed(() => {

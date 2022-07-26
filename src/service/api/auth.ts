@@ -1,4 +1,6 @@
 import http from '../axios';
+const isDev = import.meta.env.DEV;
+const apiUrl = isDev ? 'http://localhost:7345/api' : '/api';
 /**
  * 获取验证码
  * @param phone - 手机号
@@ -24,15 +26,15 @@ export function fetchSmsCode(phone: string) {
  * @param pwdOrCode - 密码或验证码
  * @param type - 登录方式: pwd - 密码登录; sms - 验证码登录
  */
-export function fetchLogin(phone: string, pwd: string) {
+export function fetchLogin(username: string, password: string) {
   return http.request(
     {
-      url: '/loginByPwd',
+      url: '/user/login',
       method: 'POST',
-      params: { phone, pwd },
+      params: { username, password },
     },
     {
-      apiUrl: '/mock',
+      apiUrl,
       isTransformRequestResult: false,
     }
   );
@@ -42,11 +44,11 @@ export function fetchLogin(phone: string, pwd: string) {
 export function fetchUserInfo() {
   return http.request(
     {
-      url: '/getUserInfo',
-      method: 'GET',
+      url: '/user/getLoginUser',
+      method: 'POST',
     },
     {
-      apiUrl: '/mock',
+      apiUrl,
       isTransformRequestResult: false,
     }
   );
@@ -72,18 +74,18 @@ export function fetchUserRoutes(userId: string) {
 }
 
 /**
- * 刷新token
- * @param refreshToken
+ * 注册
+ * @param params
  */
-export function fetchUpdateToken(refreshToken: string) {
+export function register(params) {
   return http.request(
     {
-      url: '/updateToken',
+      url: '/user/register',
       method: 'POST',
-      params: { refreshToken },
+      params,
     },
     {
-      apiUrl: '/mock',
+      apiUrl,
       isTransformRequestResult: false,
     }
   );

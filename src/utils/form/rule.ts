@@ -1,17 +1,19 @@
 import type { Ref } from 'vue';
-import type { FormItemRule } from 'naive-ui';
-import { REGEXP_PHONE, REGEXP_PWD, REGEXP_CODE_SIX, REGEXP_EMAIL } from '@/config';
+import { REGEXP_PHONE, REGEXP_PWD, REGEXP_CODE_SIX, REGEXP_EMAIL, REGEXP_USERNAME } from '@/config';
+import { ValidationRule } from 'ant-design-vue/es/form/Form';
 
 /** 表单规则 */
 interface CustomFormRules {
   /** 手机号码 */
-  phone: FormItemRule[];
+  phone: ValidationRule[];
   /** 密码 */
-  pwd: FormItemRule[];
+  pwd: ValidationRule[];
   /** 验证码 */
-  code: FormItemRule[];
+  code: ValidationRule[];
   /** 邮箱 */
-  email: FormItemRule[];
+  email: ValidationRule[];
+  /** 用户名 */
+  username: ValidationRule[];
 }
 
 /** 表单规则 */
@@ -29,11 +31,20 @@ export const formRules: CustomFormRules = {
     { pattern: REGEXP_CODE_SIX, message: '验证码格式错误', trigger: 'input' },
   ],
   email: [{ pattern: REGEXP_EMAIL, message: '邮箱格式错误', trigger: 'blur' }],
+  username: [
+    { required: true, message: '请输入用户名' },
+    {
+      min: 4,
+      max: 10,
+      message: '用户名长度必须介于 4 和 10 之间',
+    },
+    { pattern: REGEXP_USERNAME, message: '用户名为4-10位数字/字母', trigger: 'blur' },
+  ],
 };
 
 /** 获取确认密码的表单规则 */
 export function getConfirmPwdRule(pwd: Ref<string>) {
-  const confirmPwdRule: FormItemRule[] = [
+  const confirmPwdRule: ValidationRule[] = [
     { required: true, message: '请输入确认密码' },
     {
       validator: (rule, value) => {
@@ -51,7 +62,7 @@ export function getConfirmPwdRule(pwd: Ref<string>) {
 
 /** 获取图片验证码的表单规则 */
 export function getImgCodeRule(imgCode: Ref<string>) {
-  const imgCodeRule: FormItemRule[] = [
+  const imgCodeRule: ValidationRule[] = [
     { required: true, message: '请输入验证码' },
     {
       validator: (rule, value) => {

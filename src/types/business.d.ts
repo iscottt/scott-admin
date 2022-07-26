@@ -12,12 +12,12 @@ declare namespace Auth {
   /** 用户信息 */
   interface UserInfo {
     /** 用户id */
-    userId: string;
+    id: string;
     /** 用户名 */
-    userName: string;
-    /** 用户手机号 */
-    userPhone: string;
+    username: string;
     /** 用户角色类型 */
     userRole: RoleType;
+    /** 用户邮箱 */
+    email: string;
   }
 }

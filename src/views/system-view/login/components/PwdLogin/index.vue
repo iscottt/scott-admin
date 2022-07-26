@@ -2,7 +2,7 @@
   <a-form ref="formRef" :model="model" :rules="rules" :wrapper-col="{ span: 24 }" class="relative !pb-60px">
     <a-form-item name="user" has-feedback>
       <a-input
-        v-model:value="model.phone"
+        v-model:value="model.username"
         size="large"
         class="!rounded-md"
         :style="{ width: '100%' }"
@@ -11,7 +11,7 @@
     </a-form-item>
     <a-form-item name="password" has-feedback>
       <a-input
-        v-model:value="model.pwd"
+        v-model:value="model.password"
         type="password"
         placeholder="请输入密码"
         :style="{ width: '100%' }"
@@ -26,7 +26,18 @@
         <a-button type="link" @click="toLoginModule('reset-pwd')">忘记密码？</a-button>
       </div>
     </Space>
-    <a-button :disabled="!model.pwd" size="large" type="primary" block @click="handleSubmit"> 登录 </a-button>
+    <div class="w-full mb-20px flex items-center justify-evenly">
+      <a-button
+        :disabled="!model.password"
+        size="large"
+        type="primary"
+        class="w-160px !rounded-md"
+        @click="handleSubmit"
+      >
+        登录
+      </a-button>
+      <a-button size="large" class="w-160px !rounded-md" @click="toLoginModule('register')"> 注册 </a-button>
+    </div>
     <div class="mt-20px absolute -bottom-10px w-full text-#999">
       <div class="mt-3px flex-center">
         <span class="align-middle ml-3px mr-3px">建议使用</span>
@@ -69,23 +80,22 @@ const emit = defineEmits(['update:loading']);
 
 const formRef = ref<any>(null);
 const model = reactive({
-  phone: '15170283876',
-  pwd: 'abc123456',
+  username: 'scott',
+  password: 'admin@123',
 });
 const rules = {
-  phone: formRules.phone,
-  pwd: formRules.pwd,
+  username: formRules.username,
+  password: formRules.pwd,
 };
 const rememberMe = ref(false);
 
-const handleSubmit = (e: MouseEvent) => {
+const handleSubmit = (e) => {
   if (!formRef.value) return;
   e.preventDefault();
-
   formRef.value.validate().then(() => {
     emit('update:loading', true);
-    const { phone, pwd } = model;
-    login(phone, pwd).finally(() => {
+    const { username, password } = model;
+    login(username, password).finally(() => {
       emit('update:loading', false);
     });
   });

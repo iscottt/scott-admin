@@ -381,7 +381,7 @@ const apis: MockMethod[] = [
     method: 'post',
     response: (): Service.MockServiceResult => {
       return {
-        retCode: 200,
+        retCode: 0,
         retMessage: 'ok',
         retData: dataMiddleware(routes),
       };

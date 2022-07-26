@@ -2,11 +2,11 @@
  * @description: 请求结果集
  */
 export enum ResultEnum {
-  SUCCESS = 200,
+  SUCCESS = 0,
   ERROR = -1,
-  FAIL = -500,
-  TIMEOUT = 10042,
-  TYPE = 'success'
+  FAIL = 50000,
+  TIMEOUT = 40100,
+  TYPE = 'success',
 }
 
 /**
@@ -17,7 +17,7 @@ export enum RequestEnum {
   POST = 'POST',
   PATCH = 'PATCH',
   PUT = 'PUT',
-  DELETE = 'DELETE'
+  DELETE = 'DELETE',
 }
 
 /**
@@ -31,5 +31,5 @@ export enum ContentTypeEnum {
   // form-data 一般配合qs
   FORM_URLENCODED = 'application/x-www-form-urlencoded;charset=UTF-8',
   // form-data  上传
-  FORM_DATA = 'multipart/form-data;charset=UTF-8'
+  FORM_DATA = 'multipart/form-data;charset=UTF-8',
 }

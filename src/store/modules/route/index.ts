@@ -38,10 +38,9 @@ export const useRouteStore = defineStore('route-store', {
      */
     async initDynamicRoute(router: Router) {
       const { initHomeTab } = useTabStore();
-
-      const { userId } = getUserInfo();
-      if (!userId) return;
-      const { retData } = await fetchUserRoutes(userId);
+      const { id } = getUserInfo();
+      if (!id) return;
+      const { retData } = await fetchUserRoutes(id);
       if (retData) {
         this.routeHomeName = retData.home;
         this.menus = transformAuthRouteToMenu(retData.routes);

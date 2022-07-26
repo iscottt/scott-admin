@@ -31,11 +31,10 @@ const transform: AxiosTransform = {
       isShowSuccessMessage,
       successMessageText,
       errorMessageText,
-      isDownload
+      isDownload,
     } = options;
 
     const reject = Promise.reject;
-
     const { data } = res;
     //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
     const { retCode, retData, retMessage } = data;
@@ -80,8 +79,7 @@ const transform: AxiosTransform = {
       Promise.reject(new Error(msg));
     }
     // 接口请求错误，统一提示错误信息
-    if (retCode === ResultEnum.ERROR) {
-      console.log('error');
+    if (retCode > 0) {
       if (retMessage) {
         message.error(retMessage);
         Promise.reject(new Error(retMessage));
@@ -90,12 +88,12 @@ const transform: AxiosTransform = {
         message.error(msg);
         Promise.reject(new Error(msg));
       }
-      return reject();
+      return res;
     }
 
     // 登录超时
     if (retCode === ResultEnum.TIMEOUT) {
-      if (router.currentRoute.value.name == 'login') return;
+      // if (router.currentRoute.value.name == 'login') return;
       // 到登录页
       const timeoutMsg = '登录超时,请重新登录!';
       return reject(new Error(timeoutMsg));
@@ -112,7 +110,7 @@ const transform: AxiosTransform = {
   // 请求之前处理config
   beforeRequestHook: (config, options) => {
     const { apiUrl, joinParamsToUrl, isParseToJson } = options;
-    config.url = isDev ? `${apiUrl}${config.url}` : `${apiUrl || ''}${config.url}`;
+    config.url = isDev ? `${apiUrl || ''}${config.url}` : `${apiUrl || ''}${config.url}`;
 
     if (config.method === RequestEnum.GET) {
       const now = new Date().getTime();
@@ -120,8 +118,8 @@ const transform: AxiosTransform = {
         config.data = {
           // 给 get 请求加上时间戳参数，避免从缓存中拿数据。
           params: Object.assign(config.params || {}, {
-            _t: now
-          })
+            _t: now,
+          }),
         };
       } else {
         // 兼容restful风格
@@ -168,8 +166,7 @@ const transform: AxiosTransform = {
    */
   responseInterceptorsCatch: (error: any) => {
     const { response, code, message } = error || {};
-    const msg: string =
-      response && response.data && response.data.error ? response.data.error.message : '';
+    const msg: string = response && response.data && response.data.error ? response.data.error.message : '';
     const err: string = error.toString();
     try {
       if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
@@ -179,7 +176,7 @@ const transform: AxiosTransform = {
       if (err && err.includes('Network Error')) {
         Modal.confirm({
           title: '网络异常',
-          content: '请检查您的网络连接是否正常!'
+          content: '请检查您的网络连接是否正常!',
         });
         return;
       }
@@ -194,7 +191,7 @@ const transform: AxiosTransform = {
       console.warn(error, '请求被取消！');
     }
     return error;
-  }
+  },
 };
 
 const Axios = new VAxios({
@@ -223,8 +220,8 @@ const Axios = new VAxios({
     // 消息提示类型
     errorMessageMode: 'none',
     // 接口地址
-    apiUrl: import.meta.env.VITE_APP_API_URL as string
-  }
+    apiUrl: import.meta.env.VITE_APP_API_URL as string,
+  },
 });
 
 export default Axios;

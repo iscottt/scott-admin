@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import { router as globalRouter } from '@/router';
 import { useRouterPush } from '@/composables';
 import { fetchLogin, fetchUserInfo } from '@/service';
-import { getUserInfo, getToken, setUserInfo, setToken, setRefreshToken, clearAuthStorage } from '@/utils';
+import { getUserInfo, getToken, setUserInfo, setToken, clearAuthStorage } from '@/utils';
 import { notification } from 'ant-design-vue';
 
 interface AuthState {
@@ -44,13 +44,10 @@ export const useAuthStore = defineStore('auth-store', {
      * 根据token进行登录
      * @param backendToken - 返回的token
      */
-    async loginByToken(backendToken: ApiAuth.Token) {
+    async loginByToken(backendToken: string) {
       const { toLoginRedirect } = useRouterPush(false);
-
       // 先把token存储到缓存中
-      const { token, refreshToken } = backendToken;
-      setToken(token);
-      setRefreshToken(refreshToken);
+      setToken(backendToken);
 
       // 获取用户信息
       const { retData } = await fetchUserInfo();
@@ -59,14 +56,14 @@ export const useAuthStore = defineStore('auth-store', {
         setUserInfo(retData);
 
         // 更新状态
-        Object.assign(this, { userInfo: retData, token });
+        Object.assign(this, { userInfo: retData, backendToken });
 
         // 跳转登录后的地址
         toLoginRedirect();
         // 登录成功弹出欢迎提示
         notification.success({
           message: '登录成功!',
-          description: `欢迎回来，${retData.userName}!`,
+          description: `欢迎回来，${retData.username}!`,
           duration: 3,
         });
       } else {

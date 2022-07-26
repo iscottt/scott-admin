@@ -1,3 +1,4 @@
+import { getToken } from '@/utils';
 import type { AxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios';
 
 import axios from 'axios';
@@ -75,6 +76,10 @@ export class VAxios {
     // 请求拦截器配置处理
     this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
       const { headers: { ignoreCancelToken } = { ignoreCancelToken: false } } = config;
+      const token = getToken();
+      if (config.url!.indexOf('/user/login') < 0) {
+        config.headers!.Authorization = `Bearer ${token}`;
+      }
       !ignoreCancelToken && axiosCanceler.addPending(config);
       if (requestInterceptors && isFunction(requestInterceptors)) {
         config = requestInterceptors(config);

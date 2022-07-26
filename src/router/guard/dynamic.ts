@@ -14,7 +14,6 @@ export async function createDynamicRouteGuard(
 ) {
   const route = useRouteStore();
   const isLogin = Boolean(getToken());
-
   // 初始化动态路由
   if (!route.isAddedDynamicRoute) {
     // 未登录情况下直接回到登录页，登录成功后再加载动态路由
@@ -29,7 +28,6 @@ export async function createDynamicRouteGuard(
     }
 
     await route.initDynamicRoute(router);
-
     if (to.name === routeName('not-found-page')) {
       // 动态路由没有加载导致被not-found-page路由捕获，等待动态路由加载好了，回到之前的路由
       next({ path: to.fullPath, replace: true, query: to.query });
