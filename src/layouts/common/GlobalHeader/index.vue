@@ -71,6 +71,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { useAppStore } from '@/store';
 import { EnumDeviceType } from '@/enum';
 import { Breadcrumb } from 'ant-design-vue';
+import { clearLocal } from '@/utils';
 
 // 定义组件props
 interface Props {
@@ -102,7 +103,7 @@ const logout = () => {
     icon: createVNode(QuestionCircleOutlined),
     onOk: () => {
       message.success('成功退出登录', 1);
-      localStorage.clear();
+      clearLocal();
       setTimeout(() => {
         router.replace({
           name: 'login',

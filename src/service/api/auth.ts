@@ -90,3 +90,21 @@ export function register(params) {
     }
   );
 }
+
+/**
+ * 刷新token
+ * @param verifyToken
+ */
+ export function fetchUpdateToken(verifyToken: string) {
+  return http.request(
+    {
+      url: '/user/refreshToken',
+      method: 'POST',
+      params: { verifyToken },
+    },
+    {
+      apiUrl,
+      isTransformRequestResult: false,
+    }
+  );
+}

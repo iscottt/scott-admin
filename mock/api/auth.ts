@@ -2,6 +2,7 @@ import type { MockMethod } from 'vite-plugin-mock';
 
 const token: ApiAuth.Token = {
   token: '__TEMP_TOKEN__',
+  refreshToken: '__REFRESH_TOKEN__',
 };
 
 const apis: MockMethod[] = [

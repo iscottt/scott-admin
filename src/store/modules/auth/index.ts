@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import { router as globalRouter } from '@/router';
 import { useRouterPush } from '@/composables';
 import { fetchLogin, fetchUserInfo } from '@/service';
-import { getUserInfo, getToken, setUserInfo, setToken, clearAuthStorage } from '@/utils';
+import { getUserInfo, getToken, setUserInfo, setToken, clearAuthStorage, setRefreshToken } from '@/utils';
 import { notification } from 'ant-design-vue';
 
 interface AuthState {
@@ -30,31 +30,32 @@ export const useAuthStore = defineStore('auth-store', {
   actions: {
     /** 重置auth状态 */
     resetAuthStore() {
-      const { toLogin } = useRouterPush(false);
-      const route = unref(globalRouter.currentRoute);
+      // const { toLogin } = useRouterPush(false);
+      // const route = unref(globalRouter.currentRoute);
 
       clearAuthStorage();
       this.$reset();
-
-      if (route.meta.requiresAuth) {
-        toLogin();
-      }
+      // if (route.meta.requiresAuth) {
+      //   toLogin();
+      // }
     },
     /**
      * 根据token进行登录
      * @param backendToken - 返回的token
      */
-    async loginByToken(backendToken: string) {
+    async loginByToken(backendToken: ApiAuth.Token) {
       const { toLoginRedirect } = useRouterPush(false);
       // 先把token存储到缓存中
-      setToken(backendToken);
+      const { token, refreshToken } = backendToken;
+      setToken(token);
+      setRefreshToken(refreshToken);
 
       // 获取用户信息
       const { retData } = await fetchUserInfo();
       if (retData) {
         // 成功后把用户信息存储到缓存中
         setUserInfo(retData);
-
+        this.token = token;
         // 更新状态
         Object.assign(this, { userInfo: retData, backendToken });
 

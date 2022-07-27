@@ -12,7 +12,7 @@ export function checkStatus(status: number, msg: string): void {
     // 401: 未登录
     // 未登录则跳转登录页面，并携带当前页面的路径
     // 在登录成功后返回当前页面，这一步需要在登录页操作。
-    case 401:
+    case 40100:
       // error('用户没有权限（令牌、用户名称、密码错误）!')
       Modal.destroyAll();
       Modal.warning({
@@ -22,10 +22,10 @@ export function checkStatus(status: number, msg: string): void {
           clearLocal();
           router
             .replace({
-              name: 'login'
+              name: 'login',
             })
             .finally(() => location.reload());
-        }
+        },
       });
       break;
     case 403:

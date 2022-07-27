@@ -1,5 +1,6 @@
+import { EnumStorageKey } from '@/enum/common';
 import type { RouteRecordNormalized, RouteLocationNormalizedLoaded } from 'vue-router';
-
+import { setLocal } from '@/utils';
 /**
  *	根据vue路由获取tab路由
  * @param route
@@ -33,4 +34,14 @@ export function getIndexInTabRoutes(tabs: GlobalTabRoute[], path: string) {
  */
 export function isInTabRoutes(tabs: GlobalTabRoute[], path: string) {
   return getIndexInTabRoutes(tabs, path) > -1;
+}
+
+/** 缓存多页签数据 */
+export function setTabRoutes(data: GlobalTabRoute[]) {
+  setLocal(EnumStorageKey['tab-routes'], data);
+}
+
+/** 清空多页签数据 */
+export function clearTabRoutes() {
+  setTabRoutes([]);
 }

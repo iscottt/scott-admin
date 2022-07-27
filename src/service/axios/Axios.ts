@@ -1,4 +1,3 @@
-import { getToken } from '@/utils';
 import type { AxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios';
 
 import axios from 'axios';
@@ -7,6 +6,8 @@ import { isFunction } from '../is';
 import { cloneDeep } from 'lodash-es';
 
 import type { RequestOptions, CreateAxiosOptions, Result } from './types';
+import { ResultEnum } from '@/enum';
+import { handleRefreshToken } from './helper';
 // import { ContentTypeEnum } from '/@/enums/httpEnum';
 
 export * from './axiosTransform';
@@ -76,10 +77,6 @@ export class VAxios {
     // 请求拦截器配置处理
     this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
       const { headers: { ignoreCancelToken } = { ignoreCancelToken: false } } = config;
-      const token = getToken();
-      if (config.url!.indexOf('/user/login') < 0) {
-        config.headers!.Authorization = `Bearer ${token}`;
-      }
       !ignoreCancelToken && axiosCanceler.addPending(config);
       if (requestInterceptors && isFunction(requestInterceptors)) {
         config = requestInterceptors(config);
@@ -93,7 +90,14 @@ export class VAxios {
       this.axiosInstance.interceptors.request.use(undefined, requestInterceptorsCatch);
 
     // 响应结果拦截器处理
-    this.axiosInstance.interceptors.response.use((res: AxiosResponse<any>) => {
+    this.axiosInstance.interceptors.response.use(async (res: AxiosResponse<any>) => {
+      // token过期
+      if (res.data.retCode === ResultEnum.INVALID_TOKEN) {
+        const config = await handleRefreshToken(res.config);
+        if (config) {
+          return this.axiosInstance.request(config);
+        }
+      }
       res && axiosCanceler.removePending(res.config);
       if (responseInterceptors && isFunction(responseInterceptors)) {
         res = responseInterceptors(res);

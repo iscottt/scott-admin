@@ -1,3 +1,5 @@
+import { router } from '@/router';
+import { getToken, clearLocal } from '@/utils';
 // axios配置  可自行根据项目进行更改，只需更改该文件即可，其他文件可以不动
 
 import { VAxios } from './Axios';
@@ -14,7 +16,6 @@ import { setObjToUrlParams } from './urlUtils';
 import { RequestOptions, Result } from './types';
 
 const isDev = import.meta.env.DEV;
-import { router } from '@/router';
 axios.defaults.withCredentials = true;
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -78,6 +79,24 @@ const transform: AxiosTransform = {
       message.error(msg);
       Promise.reject(new Error(msg));
     }
+    // 登录超时
+    if (retCode === ResultEnum.TIMEOUT) {
+      if (router.currentRoute.value.name == 'login') return;
+      // 到登录页
+      const timeoutMsg = '登录身份已失效,请重新登录!';
+      Modal.destroyAll();
+      Modal.warning({
+        title: '提示',
+        content: timeoutMsg,
+        onOk: () => {
+          clearLocal();
+          router.replace({
+            name: 'login',
+          });
+        },
+      });
+      return reject(new Error(timeoutMsg));
+    }
     // 接口请求错误，统一提示错误信息
     if (retCode > 0) {
       if (retMessage) {
@@ -89,14 +108,6 @@ const transform: AxiosTransform = {
         Promise.reject(new Error(msg));
       }
       return res;
-    }
-
-    // 登录超时
-    if (retCode === ResultEnum.TIMEOUT) {
-      // if (router.currentRoute.value.name == 'login') return;
-      // 到登录页
-      const timeoutMsg = '登录超时,请重新登录!';
-      return reject(new Error(timeoutMsg));
     }
 
     // 这里逻辑可以根据项目进行修改
@@ -152,19 +163,17 @@ const transform: AxiosTransform = {
    */
   requestInterceptors: (config) => {
     // 请求之前处理config
-    // const token = store.state.user.token
-    // if (token) {
-    //   // jwt token
-    //   config.headers.token = token
-    // }
-
+    if (config.headers) {
+      // 设置token
+      config.headers.Authorization = 'Bearer ' + getToken();
+    }
     return config;
   },
 
   /**
    * @description: 响应错误处理
    */
-  responseInterceptorsCatch: (error: any) => {
+  responseInterceptorsCatch: async (error: any) => {
     const { response, code, message } = error || {};
     const msg: string = response && response.data && response.data.error ? response.data.error.message : '';
     const err: string = error.toString();
