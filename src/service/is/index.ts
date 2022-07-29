@@ -13,6 +13,12 @@ export function is(val: unknown, type: string) {
 export function isFunction<T = Function>(val: unknown): val is T {
   return is(val, 'Function');
 }
+export function isNull(val: unknown): val is null {
+  return val === null;
+}
+export function isNullOrUnDef(val: unknown): val is null | undefined {
+  return isUnDef(val) || isNull(val);
+}
 
 /**
  * @description: 是否已定义

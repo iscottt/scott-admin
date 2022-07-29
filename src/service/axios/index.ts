@@ -8,6 +8,7 @@ import axios, { AxiosResponse } from 'axios';
 import qs from 'qs';
 import { checkStatus } from './checkStatus';
 import { Modal, message } from 'ant-design-vue';
+
 import { RequestEnum, ResultEnum } from '@/enum';
 
 import { isString } from '../is';
@@ -107,7 +108,7 @@ const transform: AxiosTransform = {
         message.error(msg);
         Promise.reject(new Error(msg));
       }
-      return res;
+      return data;
     }
 
     // 这里逻辑可以根据项目进行修改

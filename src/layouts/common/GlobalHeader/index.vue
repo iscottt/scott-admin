@@ -41,16 +41,16 @@
           <template #overlay>
             <a-menu @click="handleMenuClick">
               <a-menu-item key="logout">
-                <div class="dropdown-item"><MdiExitToApp class="mr-2" />退出登录</div>
+                <div class="dropdown-item"><Icon icon="bx:exit" class="mr-2" />退出登录</div>
               </a-menu-item>
               <a-menu-item>
-                <div class="dropdown-item"><EpSetting class="mr-2" />个人设置</div>
+                <div class="dropdown-item"><Icon icon="icon-park-outline:setting-one" class="mr-2" />个人设置</div>
               </a-menu-item>
               <a-menu-item>
-                <div class="dropdown-item"><MdiSquareEditOutline class="mr-2" />修改密码</div>
+                <div class="dropdown-item"><Icon icon="ri:lock-password-line" class="mr-2" />修改密码</div>
               </a-menu-item>
               <a-menu-item v-if="isMobile" key="menu">
-                <div class="dropdown-item"><MdiMenu class="mr-2" />打开菜单</div>
+                <div class="dropdown-item"><Icon icon="eva:menu-outline" class="mr-2" />打开菜单</div>
               </a-menu-item>
             </a-menu>
           </template>
@@ -64,6 +64,7 @@
 </template>
 
 <script lang="ts" setup>
+import { Icon } from '@iconify/vue';
 import { QuestionCircleOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue';
 import { message, Modal } from 'ant-design-vue';
 import { computed, createVNode } from 'vue';

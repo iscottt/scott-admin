@@ -7,7 +7,6 @@
 <script setup lang="ts">
 import { useAppStore } from '@/store';
 import { useLoading } from '@/hooks';
-import { ReloadOutlined } from '@ant-design/icons-vue';
 import HoverContainer from '@/components/common/HoverContainer.vue';
 
 const app = useAppStore();

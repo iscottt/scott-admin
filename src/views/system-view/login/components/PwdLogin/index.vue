@@ -20,6 +20,18 @@
         @keydown.enter="handleSubmit"
       />
     </a-form-item>
+    <a-form-item name="code">
+      <div class="flex items-center justify-between">
+        <a-input
+          v-model:value="model.code"
+          placeholder="请输入验证码"
+          size="large"
+          class="!rounded-md !flex-1 !mr-2"
+          @keydown.enter="handleSubmit"
+        />
+        <ImageVerify v-model:code="verifyCode" ref="verifyRef" />
+      </div>
+    </a-form-item>
     <Space :vertical="true" :size="24" class="w-full !block mb-20px">
       <div class="w-full flex-y-center justify-between">
         <a-checkbox v-model:checked="rememberMe">记住我</a-checkbox>
@@ -65,31 +77,38 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import { Space } from 'ant-design-vue';
+import ImageVerify from '@/components/custom/ImageVerify.vue';
+import { message, Space } from 'ant-design-vue';
 import { formRules } from '@/utils';
 import { useRouterPush } from '@/composables';
 import { useAuthStore } from '@/store';
 const { toLoginModule } = useRouterPush();
 const { login } = useAuthStore();
-
+const verifyCode = ref('');
 interface Props {
   loading: boolean;
 }
 defineProps<Props>();
 const emit = defineEmits(['update:loading']);
-
+const verifyRef = ref<any>(null);
 const formRef = ref<any>(null);
 const model = reactive({
   username: 'scott',
   password: 'admin@123',
+  code: '',
 });
 const rules = {
   username: formRules.username,
   password: formRules.pwd,
+  code: [{ required: true, message: '请输入验证码' }],
 };
 const rememberMe = ref(false);
 
 const handleSubmit = (e) => {
+  if (model.code != verifyCode.value) {
+    message.warning('验证码错误');
+    return verifyRef.value.getImgCode();
+  }
   if (!formRef.value) return;
   e.preventDefault();
   formRef.value.validate().then(() => {
@@ -97,6 +116,7 @@ const handleSubmit = (e) => {
     const { username, password } = model;
     login(username, password).finally(() => {
       emit('update:loading', false);
+      verifyRef.value.getImgCode();
     });
   });
 };

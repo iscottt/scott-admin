@@ -1,14 +1,12 @@
 <template>
-  <Result :status="type" :title="type" :sub-title="exceptionTitle">
+  <a-result :status="type" :title="type" :sub-title="exceptionTitle">
     <template #extra class="!h-50px">
-      <a-button type="primary" @click="router.push(routeHomePath)">回到首页</a-button>
+      <a-button type="primary" @click="router.push('/')">回到首页</a-button>
     </template>
-  </Result>
+  </a-result>
 </template>
 
 <script lang="ts" setup>
-import { routeName } from '@/router';
-import { Result } from 'ant-design-vue';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
@@ -34,7 +32,5 @@ const exceptionTitle = computed(() => {
       break;
   }
 });
-
-const routeHomePath = routeName('root');
 </script>
 <style scoped></style>

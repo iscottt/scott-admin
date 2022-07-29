@@ -18,7 +18,7 @@ html, body, #app {
 }
 
 /* 隐藏滚动条 */
-body::-webkit-scrollbar{
+*::-webkit-scrollbar{
   display: none; /* Chrome Safari */
 }
 
@@ -65,4 +65,14 @@ body::-webkit-scrollbar{
 .ant-menu-item-selected:not(.ant-menu-submenu){
   width: calc(100% - 30px) !important;
   @apply  !bg-blue-500 !rounded-md box-border;
+}
+
+.btn-icon{
+  @apply flex items-center justify-center;
+}
+
+.ant-pagination-prev .ant-pagination-item-link, .ant-pagination-next .ant-pagination-item-link{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }

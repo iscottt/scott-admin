@@ -5,7 +5,7 @@ import { ref, onMounted } from 'vue';
  * @param width - 图形宽度
  * @param height - 图形高度
  */
-export default function useImageVerify(width = 152, height = 40) {
+export default function useImageVerify(width = 120, height = 40) {
   const domRef = ref<HTMLCanvasElement>();
   const imgCode = ref('');
 
@@ -61,7 +61,7 @@ function draw(dom: HTMLCanvasElement, width: number, height: number) {
     ctx.textBaseline = 'top';
     ctx.fillStyle = randomColor(80, 150);
     ctx.save();
-    ctx.translate(30 * i + 23, 15);
+    ctx.translate(30 * i + 18, 15);
     ctx.rotate((deg * Math.PI) / 180);
     ctx.fillText(text, -15 + 5, -15);
     ctx.restore();

@@ -1,9 +1,9 @@
-import AButton from './button.vue';
+import SButton from './button.vue';
 
-export default AButton;
+export default SButton;
 
-export const Button = AButton;
+export const Button = SButton;
 
 export * from './button';
 
-export { AButton };
+export { SButton };

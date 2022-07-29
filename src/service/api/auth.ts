@@ -29,7 +29,7 @@ export function fetchSmsCode(phone: string) {
 export function fetchLogin(username: string, password: string) {
   return http.request(
     {
-      url: '/user/login',
+      url: '/auth/login',
       method: 'POST',
       params: { username, password },
     },
@@ -44,8 +44,8 @@ export function fetchLogin(username: string, password: string) {
 export function fetchUserInfo() {
   return http.request(
     {
-      url: '/user/getLoginUser',
-      method: 'POST',
+      url: '/auth/getLoginUser',
+      method: 'GET',
     },
     {
       apiUrl,
@@ -62,12 +62,12 @@ export function fetchUserInfo() {
 export function fetchUserRoutes(userId: string) {
   return http.request(
     {
-      url: '/getUserRoutes',
+      url: '/menu/getRoutes',
       method: 'POST',
       params: { userId },
     },
     {
-      apiUrl: '/mock',
+      apiUrl,
       isTransformRequestResult: false,
     }
   );
@@ -80,7 +80,7 @@ export function fetchUserRoutes(userId: string) {
 export function register(params) {
   return http.request(
     {
-      url: '/user/register',
+      url: '/auth/register',
       method: 'POST',
       params,
     },
@@ -95,10 +95,10 @@ export function register(params) {
  * 刷新token
  * @param verifyToken
  */
- export function fetchUpdateToken(verifyToken: string) {
+export function fetchUpdateToken(verifyToken: string) {
   return http.request(
     {
-      url: '/user/refreshToken',
+      url: '/auth/refreshToken',
       method: 'POST',
       params: { verifyToken },
     },

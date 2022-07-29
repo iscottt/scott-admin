@@ -6,7 +6,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import unplugin from './unplugin';
 import autoImport from './autoImport';
 import WindiCSS from './WindiCSS';
-import Icons from './icons';
 
 /**
  *	vite插件
@@ -19,6 +18,6 @@ export function setupVitePlugins(
   _srcPath: string,
   _viteEnv: ImportMetaEnv
 ): (PluginOption | PluginOption[])[] {
-  const plugins = [vue, mock, DefineOptions(), vueJsx(), unplugin, autoImport, WindiCSS, Icons];
+  const plugins = [vue, mock, DefineOptions(), vueJsx(), unplugin, autoImport, WindiCSS];
   return plugins;
 }
