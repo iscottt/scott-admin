@@ -1,7 +1,7 @@
 import { TableColumn } from '@/components/core/dynamic-table';
 import { useFormatDate } from '@/hooks';
 import { useFormModal } from '@/hooks/business/useFormModal';
-import { deleteUser, updateUser } from '@/service';
+import { deleteRole, updateRole } from '@/service';
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import { message, Modal, Tag } from 'ant-design-vue';
 import { createVNode } from 'vue';
@@ -14,8 +14,7 @@ export const columns: TableColumn[] = [
     title: 'ID',
     width: 100,
   },
-  { align: 'center', dataIndex: 'username', width: 200, title: '用户名' },
-  { align: 'center', dataIndex: 'userRole', width: 100, title: '角色' },
+  { align: 'center', dataIndex: 'roleName', width: 200, title: '角色名称' },
   {
     align: 'center',
     dataIndex: 'status',
@@ -52,19 +51,21 @@ export const columns: TableColumn[] = [
       {
         label: '编辑',
         onClick: () => {
+          const tempRecord = JSON.parse(JSON.stringify(record));
+          tempRecord.menuIds = tempRecord.menuIds.split(',').map((key) => +key);
           useFormModal({
             title: '编辑用户',
-            fields: record,
+            fields: tempRecord,
             formSchema: getFormSchema(),
             handleOk: async (modelRef) => {
+              console.log(modelRef);
               const params = {
                 id: modelRef.id,
-                username: modelRef.username,
-                email: modelRef.email,
+                roleName: modelRef.roleName,
                 status: modelRef.status,
-                userRole: modelRef.userRole,
+                menuIds: modelRef.menuIds.join(','),
               };
-              await updateUser(params);
+              await updateRole(params);
               return instance.reload();
             },
           });
@@ -76,11 +77,11 @@ export const columns: TableColumn[] = [
           Modal.confirm({
             title: '提示',
             icon: createVNode(ExclamationCircleOutlined),
-            content: '是否确认删除该用户',
+            content: '是否确认删除该角色',
             okText: '确认',
             cancelText: '取消',
             onOk: async () => {
-              await deleteUser(record.id);
+              await deleteRole(record.id);
               return instance.reload();
             },
           });

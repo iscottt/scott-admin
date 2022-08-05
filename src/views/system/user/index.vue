@@ -86,7 +86,7 @@ const handleInsert = () => {
         username: modelRef.username,
         email: modelRef.email,
         status: modelRef.status,
-        userRole: modelRef.userRole,
+        roleIds: modelRef.roleIds.join(','),
       };
       const result = await insertUser(params);
       tableRef.value.reload();

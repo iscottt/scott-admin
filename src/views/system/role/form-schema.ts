@@ -1,3 +1,5 @@
+import { getRouteTree } from '@/service';
+
 export const getFormSchema = (): FormSchema => ({
   style: {
     width: 'auto',
@@ -13,30 +15,17 @@ export const getFormSchema = (): FormSchema => ({
   formItem: [
     {
       type: 'input',
-      label: '用户名',
-      field: 'username',
-      value: '',
-      props: {
-        placeholder: '请输入用户名',
-      },
-    },
-    {
-      type: 'input',
-      label: '邮箱',
-      field: 'email',
+      label: '角色名称',
+      field: 'roleName',
       rules: [
         {
           required: true,
-          message: '邮箱不能为空',
-        },
-        {
-          pattern: /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
-          message: '请输入合法邮箱',
+          message: '角色名称不能为空',
         },
       ],
       value: '',
       props: {
-        placeholder: '请输入邮箱',
+        placeholder: '请输入角色名称',
       },
     },
     {
@@ -47,18 +36,21 @@ export const getFormSchema = (): FormSchema => ({
         { label: '启用', value: 1 },
         { label: '禁用', value: 2 },
       ],
-      value: '',
+      value: 1,
     },
     {
-      type: 'select',
-      label: '角色',
-      field: 'userRole',
-      value: '',
-      options: [
-        { label: 'admin', value: 'admin' },
-        { label: 'visitor', value: 'visitor' },
-        { label: 'test', value: 'test' },
-      ],
+      type: 'tree',
+      label: '菜单权限',
+      field: 'menuIds',
+      value: [],
+      loading: true,
+      props: {
+        checkable: true,
+      },
+      asyncOptions: async () => {
+        const { retData } = await getRouteTree();
+        return retData;
+      },
     },
   ],
 });

@@ -15,7 +15,7 @@ export const columns: TableColumn[] = [
     width: 100,
   },
   { align: 'center', dataIndex: 'username', width: 200, title: '用户名' },
-  { align: 'center', dataIndex: 'userRole', width: 100, title: '角色' },
+  // { align: 'center', dataIndex: 'userRole', width: 100, title: '角色' },
   {
     align: 'center',
     dataIndex: 'status',
@@ -52,9 +52,12 @@ export const columns: TableColumn[] = [
       {
         label: '编辑',
         onClick: () => {
+          const tempRecord = JSON.parse(JSON.stringify(record));
+          console.log('tempRecord', tempRecord);
+          tempRecord.roleIds = tempRecord.roleIds ? tempRecord.roleIds.split(',').map((roleId) => +roleId) : [];
           useFormModal({
             title: '编辑用户',
-            fields: record,
+            fields: tempRecord,
             formSchema: getFormSchema(),
             handleOk: async (modelRef) => {
               const params = {
@@ -62,7 +65,7 @@ export const columns: TableColumn[] = [
                 username: modelRef.username,
                 email: modelRef.email,
                 status: modelRef.status,
-                userRole: modelRef.userRole,
+                roleIds: modelRef.roleIds.join(','),
               };
               await updateUser(params);
               return instance.reload();

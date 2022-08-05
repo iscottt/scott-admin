@@ -20,6 +20,7 @@ declare global {
   declare interface FormItem extends Partial<typeof FormItemProps> {
     type?:
       | 'input'
+      | 'tree'
       | 'textarea'
       | 'select'
       | 'radio'
@@ -33,30 +34,25 @@ declare global {
     field: string; // 表单字段
     value: any; // 表单默认值
     mode?: string;
-    props?: Partial<
-      HTMLAttributes | HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | any
-    >; // 表单属性
+    props?: Partial<HTMLAttributes | HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | any>; // 表单属性
     rules?: Rule[]; // 表单验证规则
     extendClass?: string;
     options?: OptionItem[]; // 可选项
     eventObject?: object; // 事件对象，例如：{ mousedown: doThis, mouseup: doThat } 将会动态绑定为：v-on="{ mousedown: doThis, mouseup: doThat }"
     loading?: boolean; // 异步数据是否加载
     disabled?: boolean; // 是否禁用
-    asyncValue?: (
-      formItem: FormItem,
-      formInstance: ComponentInternalInstance | null
-    ) => Promise<any>; // 异步数据
-    asyncOptions?: (
-      formItem: FormItem,
-      formInstance: ComponentInternalInstance | null
-    ) => Promise<OptionItem[]>; // 异步选项的数据
+    asyncValue?: (formItem: FormItem, formInstance: ComponentInternalInstance | null) => Promise<any>; // 异步数据
+    asyncOptions?: (formItem: FormItem, formInstance: ComponentInternalInstance | null) => Promise<OptionItem[]>; // 异步选项的数据
     hidden?: boolean; // 是否隐藏表单项
     placeholder?: string;
+    help?: any;
+    extra?: any;
   }
 
   interface FormSchema extends Partial<typeof FormProps> {
     style?: CSSProperties; // 表单样式
     formItemLayout?: object; // 表单布局
+    layout?: any;
     watchKeys?: string[];
     watchCallback?: (watchKeys: string[], { dynamicForm, modelRef }) => any;
     formItem: FormItem[];

@@ -1,23 +1,17 @@
 <template>
-  <a-select
-    v-model:value="modelValue"
-    :disabled="formItem.disabled"
+  <a-tree
+    v-model:checkedKeys="modelValue"
     v-bind="formItem.props"
+    :disabled="formItem.disabled"
     v-on="formItem.eventObject"
-    placeholder="请选择"
-  >
-    <template v-for="option in formItem.options" :key="option.value">
-      <a-select-option :value="option.value">
-        {{ option.label }}
-      </a-select-option>
-    </template>
-  </a-select>
+    :tree-data="formItem.options"
+  />
 </template>
 <script lang="ts">
 import { PropType } from 'vue';
 
 export default defineComponent({
-  name: 'SchemaFormSelect',
+  name: 'SchemaFormTree',
   props: {
     formItem: {
       // 表单项

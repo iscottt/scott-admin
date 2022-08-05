@@ -39,6 +39,7 @@
 </template>
 
 <script lang="ts">
+import { PropType, isReactive, createVNode } from 'vue';
 import { Form, Spin, Row, Col } from 'ant-design-vue';
 import { isString, isFunction, isAsyncFunction } from '@/service/is';
 import components from './components';
@@ -134,6 +135,7 @@ export default defineComponent({
       'date-picker',
       'input-range',
       'switch',
+      'tree',
     ];
     // 获取组件名称
     const getComponent = (type) => {
@@ -180,6 +182,9 @@ export default defineComponent({
       }
       return events;
     };
+    onMounted(() => {
+      console.log(props.formSchema.formItem);
+    });
     return {
       formItemLayout,
       validate,

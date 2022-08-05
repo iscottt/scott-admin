@@ -1,3 +1,5 @@
+import { getRoleByPage } from '@/service';
+
 export const getFormSchema = (): FormSchema => ({
   style: {
     width: 'auto',
@@ -52,13 +54,26 @@ export const getFormSchema = (): FormSchema => ({
     {
       type: 'select',
       label: '角色',
-      field: 'userRole',
-      value: '',
-      options: [
-        { label: 'admin', value: 'admin' },
-        { label: 'visitor', value: 'visitor' },
-        { label: 'test', value: 'test' },
-      ],
+      field: 'roleIds',
+      props: {
+        mode: 'multiple',
+      },
+      value: [],
+      asyncOptions: async () => {
+        const { rows } = await getRoleByPage({
+          current: 1,
+          pageSize: 99,
+        });
+        const options: any[] = [];
+        rows.map((i) => {
+          const obj = {
+            value: i.id,
+            label: i.roleName,
+          };
+          options.push(obj);
+        });
+        return options;
+      },
     },
   ],
 });

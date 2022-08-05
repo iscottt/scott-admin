@@ -1,30 +1,12 @@
 import http from '../axios';
 const isDev = import.meta.env.DEV;
 const apiUrl = isDev ? 'http://localhost:7345/api' : '/api';
-/**
- * 获取验证码
- * @param phone - 手机号
- * @returns - 返回boolean值表示是否发送成功
- */
-export function fetchSmsCode(phone: string) {
-  return http.request(
-    {
-      url: '/getSmsCode',
-      method: 'POST',
-      params: { phone },
-    },
-    {
-      apiUrl: '/mock',
-      isTransformRequestResult: false,
-    }
-  );
-}
 
 /**
  * 登录
- * @param phone - 手机号
- * @param pwdOrCode - 密码或验证码
- * @param type - 登录方式: pwd - 密码登录; sms - 验证码登录
+ * @param username
+ * @param password
+ * @returns
  */
 export function fetchLogin(username: string, password: string) {
   return http.request(
@@ -101,6 +83,23 @@ export function fetchUpdateToken(verifyToken: string) {
       url: '/auth/refreshToken',
       method: 'POST',
       params: { verifyToken },
+    },
+    {
+      apiUrl,
+      isTransformRequestResult: false,
+    }
+  );
+}
+
+/**
+ * 获取菜单树
+ * @returns
+ */
+export function getRouteTree() {
+  return http.request(
+    {
+      url: '/menu/getMenuTree',
+      method: 'GET',
     },
     {
       apiUrl,
