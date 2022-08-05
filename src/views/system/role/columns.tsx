@@ -3,7 +3,7 @@ import { useFormatDate } from '@/hooks';
 import { useFormModal } from '@/hooks/business/useFormModal';
 import { deleteRole, updateRole } from '@/service';
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
-import { message, Modal, Tag } from 'ant-design-vue';
+import { Modal, Tag } from 'ant-design-vue';
 import { createVNode } from 'vue';
 import { getFormSchema } from './form-schema';
 
@@ -58,7 +58,6 @@ export const columns: TableColumn[] = [
             fields: tempRecord,
             formSchema: getFormSchema(),
             handleOk: async (modelRef) => {
-              console.log(modelRef);
               const params = {
                 id: modelRef.id,
                 roleName: modelRef.roleName,

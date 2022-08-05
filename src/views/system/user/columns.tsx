@@ -3,7 +3,7 @@ import { useFormatDate } from '@/hooks';
 import { useFormModal } from '@/hooks/business/useFormModal';
 import { deleteUser, updateUser } from '@/service';
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
-import { message, Modal, Tag } from 'ant-design-vue';
+import { Modal, Tag } from 'ant-design-vue';
 import { createVNode } from 'vue';
 import { getFormSchema } from './form-schema';
 
@@ -53,7 +53,6 @@ export const columns: TableColumn[] = [
         label: '编辑',
         onClick: () => {
           const tempRecord = JSON.parse(JSON.stringify(record));
-          console.log('tempRecord', tempRecord);
           tempRecord.roleIds = tempRecord.roleIds ? tempRecord.roleIds.split(',').map((roleId) => +roleId) : [];
           useFormModal({
             title: '编辑用户',
