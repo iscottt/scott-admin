@@ -6,7 +6,7 @@
     <div class="header-container">
       <!-- 收缩菜单的按钮 -->
       <div v-if="!isMobile" class="collapsed" @click="emit('update:collapsed', !collapsed)">
-        <component class="text-lg pl-20px pr-20px" :is="collapsed ? MenuUnfoldOutlined : MenuFoldOutlined" />
+        <component :is="collapsed ? MenuUnfoldOutlined : MenuFoldOutlined" class="text-lg pl-20px pr-20px" />
       </div>
       <!-- 面包屑 -->
       <div class="breadcrumb-container">
@@ -33,7 +33,7 @@
             <div class="avatar" :class="isMobile ? '!mr-0' : ''">
               <img src="https://gd-hbimg.huaban.com/c06f36af307897793abc4d44368b8be337f3a5c5d741-yvh53F_sq180" />
             </div>
-            <div class="info" v-if="!isMobile">
+            <div v-if="!isMobile" class="info">
               <span>Scott</span>
               <span>iscottt@163.com</span>
             </div>
@@ -41,16 +41,16 @@
           <template #overlay>
             <a-menu @click="handleMenuClick">
               <a-menu-item key="logout">
-                <div class="dropdown-item"><Icon icon="bx:exit" class="mr-2" />退出登录</div>
+                <div class="dropdown-item"><export-outlined class="mr-2" />退出登录</div>
               </a-menu-item>
               <a-menu-item>
                 <div class="dropdown-item"><Icon icon="icon-park-outline:setting-one" class="mr-2" />个人设置</div>
               </a-menu-item>
               <a-menu-item>
-                <div class="dropdown-item"><Icon icon="ri:lock-password-line" class="mr-2" />修改密码</div>
+                <div class="dropdown-item"><edit-outlined class="mr-2" />修改密码</div>
               </a-menu-item>
               <a-menu-item v-if="isMobile" key="menu">
-                <div class="dropdown-item"><Icon icon="eva:menu-outline" class="mr-2" />打开菜单</div>
+                <div class="dropdown-item"><menu-outlined class="mr-2" />打开菜单</div>
               </a-menu-item>
             </a-menu>
           </template>
@@ -64,19 +64,18 @@
 </template>
 
 <script lang="ts" setup>
-import { Icon } from '@iconify/vue';
-import { QuestionCircleOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue';
-import { message, Modal } from 'ant-design-vue';
 import { computed, createVNode } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useAppStore } from '@/store';
+import { Icon } from '@iconify/vue';
+import { QuestionCircleOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue';
+import { message, Modal, Breadcrumb } from 'ant-design-vue';
 import { EnumDeviceType } from '@/enum';
-import { Breadcrumb } from 'ant-design-vue';
+import { useAppStore } from '@/store';
 import { clearLocal } from '@/utils';
 
 // 定义组件props
 interface Props {
-  collapsed: Boolean;
+  collapsed: boolean;
 }
 const props = defineProps<Props>();
 const emit = defineEmits(['update:collapsed']);
@@ -87,16 +86,6 @@ const route = useRoute();
 const isMobile = computed(() => {
   return app.device === EnumDeviceType.mobile;
 });
-const handleMenuClick = (e) => {
-  switch (e.key) {
-    case 'logout':
-      logout();
-      break;
-    case 'menu':
-      emit('update:collapsed', !props.collapsed);
-      break;
-  }
-};
 // 退出登录
 const logout = () => {
   Modal.confirm({
@@ -112,6 +101,19 @@ const logout = () => {
       }, 1000);
     },
   });
+};
+
+const handleMenuClick = (e) => {
+  switch (e.key) {
+    case 'logout':
+      logout();
+      break;
+    case 'menu':
+      emit('update:collapsed', !props.collapsed);
+      break;
+    default:
+      break;
+  }
 };
 </script>
 

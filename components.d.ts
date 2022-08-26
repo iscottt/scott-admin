@@ -56,10 +56,12 @@ declare module '@vue/runtime-core' {
     CountTo: typeof import('./src/components/custom/CountTo.vue')['default']
     DynamicTable: typeof import('./src/components/core/dynamic-table/src/dynamic-table.vue')['default']
     'DynamicTable.old': typeof import('./src/components/core/dynamic-table.old/index.ts')['default'];
+    EditOutlined: typeof import('@ant-design/icons-vue')['EditOutlined']
     EpRefresh: typeof import('~icons/ep/refresh')['default'];
     EpSearch: typeof import('~icons/ep/search')['default'];
     EpSetting: typeof import('~icons/ep/setting')['default'];
     EpTop: typeof import('~icons/ep/top')['default'];
+    ExportOutlined: typeof import('@ant-design/icons-vue')['ExportOutlined']
     Form: typeof import('./src/components/core/schema-form/src/types/form.ts')['default'];
     FormAction: typeof import('./src/components/core/schema-form/src/components/form-action.vue')['default'];
     FormItem: typeof import('./src/components/core/schema-form/src/types/formItem.ts')['default'];
@@ -76,6 +78,7 @@ declare module '@vue/runtime-core' {
     MdiMenu: typeof import('~icons/mdi/menu')['default'];
     MdiPlus: typeof import('~icons/mdi/plus')['default'];
     MdiSquareEditOutline: typeof import('~icons/mdi/square-edit-outline')['default'];
+    MenuOutlined: typeof import('@ant-design/icons-vue')['MenuOutlined']
     RefreshSetting: typeof import('./src/components/core/dynamic-table/src/components/table-settings/refresh-setting.vue')['default'];
     ReloadOutlined: typeof import('@ant-design/icons-vue')['ReloadOutlined']
     RouterLink: typeof import('vue-router')['RouterLink']

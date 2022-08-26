@@ -8,6 +8,7 @@ export const constantRoutes: AuthRoute.Route[] = [
     redirect: '/dashboard/analysis',
     meta: {
       title: 'Root',
+      requiresAuth: true
     },
   },
   {
