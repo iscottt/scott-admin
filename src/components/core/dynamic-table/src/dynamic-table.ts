@@ -1,9 +1,8 @@
-import { tableProps } from 'ant-design-vue/es/table';
-import DynamicTable from './dynamic-table.vue';
 import type { PropType, ExtractPropTypes } from 'vue';
-import type { LoadDataParams, TableColumn, OnChangeCallbackParams } from './types';
-import type { SchemaFormProps } from '@/components/core/schema-form';
+import { tableProps } from 'ant-design-vue/es/table';
 import { isBoolean } from '@/service/is';
+import DynamicTable from './dynamic-table.vue';
+import type { LoadDataParams, TableColumn, OnChangeCallbackParams } from './types';
 
 export const dynamicTableProps = {
   ...tableProps(),
@@ -14,7 +13,7 @@ export const dynamicTableProps = {
   },
   /** 表单属性配置 */
   formProps: {
-    type: Object as PropType<SchemaFormProps>,
+    type: Object,
     default: () => ({}),
   },
   /** 表格列配置 */

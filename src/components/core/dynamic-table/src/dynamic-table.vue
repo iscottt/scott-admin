@@ -35,6 +35,7 @@
 </template>
 
 <script lang="tsx" setup>
+import 'ant-design-vue/es/table/style/css';
 import { useSlots } from 'vue';
 import { Table } from 'ant-design-vue';
 import { useTableMethods, createTableContext, useTableState } from './hooks';
