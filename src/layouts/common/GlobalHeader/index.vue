@@ -64,6 +64,7 @@
 </template>
 
 <script lang="ts" setup>
+import 'ant-design-vue/es/breadcrumb/style/css';
 import { computed, createVNode } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { Icon } from '@iconify/vue';

@@ -1,14 +1,12 @@
 import { createApp } from 'vue';
-import { setupAssets } from '@/core';
-import App from './App.vue';
-import { setupRouter } from './router';
 import { setupStore } from '@/store';
+import { setupAssets } from '@/core';
 import { SButton } from '@/components/common/button/index';
+import { setupRouter } from './router';
+import App from './App.vue';
 import 'virtual:windi.css';
-import 'ant-design-vue/es/table/style/css';
 import 'ant-design-vue/es/message/style/css';
 import 'ant-design-vue/es/notification/style/css';
-import 'ant-design-vue/es/breadcrumb/style/css';
 import 'ant-design-vue/es/modal/style/css';
 
 async function setupApp() {
