@@ -1,69 +1,32 @@
-import type { AxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios';
-
-import axios from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { AxiosCanceler } from './axiosCancel';
-import { isFunction } from '../is';
+import { CreateAxiosOptions, RequestOptions, Result } from './types';
+
 import { cloneDeep } from 'lodash-es';
-
-import type { RequestOptions, CreateAxiosOptions, Result } from './types';
 import { ResultEnum } from '@/enum';
-import { handleRefreshToken } from './helper';
-// import { ContentTypeEnum } from '/@/enums/httpEnum';
+import { handleRefreshToken, isFunction } from './helper';
 
-export * from './axiosTransform';
-
-/**
- * @description:  axios模块
- */
-export class VAxios {
-  private axiosInstance: AxiosInstance;
-  private options: CreateAxiosOptions;
-
-  constructor(options: CreateAxiosOptions) {
-    this.options = options;
-    this.axiosInstance = axios.create(options);
+export class HttpUtil {
+  // axios实例
+  private instance: AxiosInstance;
+  private configForCreate: CreateAxiosOptions;
+  constructor(config: CreateAxiosOptions) {
+    // 初始化实例
+    this.instance = axios.create(config);
+    this.configForCreate = config;
+    // 创建拦截器
     this.setupInterceptors();
   }
-
-  /**
-   * @description:  创建axios实例
-   */
-  private createAxios(config: CreateAxiosOptions): void {
-    this.axiosInstance = axios.create(config);
+  // 获取实例
+  getAxios(): AxiosInstance {
+    return this.instance;
   }
-
-  private getTransform() {
-    const { transform } = this.options;
+  // 数据处理
+  getTransform() {
+    const { transform } = this.configForCreate;
     return transform;
   }
-
-  getAxios(): AxiosInstance {
-    return this.axiosInstance;
-  }
-
-  /**
-   * @description: 重新配置axios
-   */
-  configAxios(config: CreateAxiosOptions) {
-    if (!this.axiosInstance) {
-      return;
-    }
-    this.createAxios(config);
-  }
-
-  /**
-   * @description: 设置通用header
-   */
-  setHeader(headers: any): void {
-    if (!this.axiosInstance) {
-      return;
-    }
-    Object.assign(this.axiosInstance.defaults.headers, headers);
-  }
-
-  /**
-   * @description: 拦截器配置
-   */
+  // request 拦截器
   private setupInterceptors() {
     const transform = this.getTransform();
     if (!transform) {
@@ -71,13 +34,14 @@ export class VAxios {
     }
     const { requestInterceptors, requestInterceptorsCatch, responseInterceptors, responseInterceptorsCatch } =
       transform;
-
     const axiosCanceler = new AxiosCanceler();
-
+    
     // 请求拦截器配置处理
-    this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
+    this.instance.interceptors.request.use((config: AxiosRequestConfig) => {
+      // 是否需要取消请求
       const { headers: { ignoreCancelToken } = { ignoreCancelToken: false } } = config;
       !ignoreCancelToken && axiosCanceler.addPending(config);
+      // 配置拦截器
       if (requestInterceptors && isFunction(requestInterceptors)) {
         config = requestInterceptors(config);
       }
@@ -87,15 +51,15 @@ export class VAxios {
     // 请求拦截器错误捕获
     requestInterceptorsCatch &&
       isFunction(requestInterceptorsCatch) &&
-      this.axiosInstance.interceptors.request.use(undefined, requestInterceptorsCatch);
+      this.instance.interceptors.request.use(undefined, requestInterceptorsCatch);
 
     // 响应结果拦截器处理
-    this.axiosInstance.interceptors.response.use(async (res: AxiosResponse<any>) => {
+    this.instance.interceptors.response.use(async (res: AxiosResponse<any>) => {
       // token过期
       if (res.data.retCode === ResultEnum.INVALID_TOKEN) {
         const config = await handleRefreshToken(res.config);
         if (config) {
-          return this.axiosInstance.request(config);
+          return this.instance.request(config);
         }
       }
       res && axiosCanceler.removePending(res.config);
@@ -108,38 +72,15 @@ export class VAxios {
     // 响应结果拦截器错误捕获
     responseInterceptorsCatch &&
       isFunction(responseInterceptorsCatch) &&
-      this.axiosInstance.interceptors.response.use(undefined, responseInterceptorsCatch);
+      this.instance.interceptors.response.use(undefined, responseInterceptorsCatch);
   }
 
-  // /**
-  //  * @description:  文件上传
-  //  */
-  // uploadFiles(config: AxiosRequestConfig, params: File[]) {
-  //   const formData = new FormData();
-
-  //   Object.keys(params).forEach((key) => {
-  //     formData.append(key, params[key as any]);
-  //   });
-
-  //   return this.request({
-  //     ...config,
-  //     method: 'POST',
-  //     data: formData,
-  //     headers: {
-  //       'Content-type': ContentTypeEnum.FORM_DATA,
-  //     },
-  //   });
-  // }
-
-  /**
-   * @description:   请求方法
-   */
-  request<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+  // 请求
+  request<T = any>(config: AxiosRequestConfig, options: RequestOptions): Promise<T> {
     let conf: AxiosRequestConfig = cloneDeep(config);
     const transform = this.getTransform();
 
-    const { requestOptions } = this.options;
-
+    const { requestOptions } = this.configForCreate;
     const opt: RequestOptions = Object.assign({}, requestOptions, options);
 
     const { beforeRequestHook, requestCatch, transformRequestData } = transform || {};
@@ -147,7 +88,7 @@ export class VAxios {
       conf = beforeRequestHook(conf, opt);
     }
     return new Promise((resolve, reject) => {
-      this.axiosInstance
+      this.instance
         .request<any, AxiosResponse<Result>>(conf)
         .then((res: AxiosResponse<Result>) => {
           // 请求是否被取消

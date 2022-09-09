@@ -1,4 +1,4 @@
-import http from '../axios';
+import http from '../httpUtil';
 const isDev = import.meta.env.DEV;
 const apiUrl = isDev ? 'http://localhost:7345/api' : '/api';
 
@@ -74,6 +74,21 @@ export function deleteUser(id) {
       apiUrl,
       isTransformRequestResult: false,
       successMessageText: '操作成功',
+    }
+  );
+}
+
+export function downloadUser() {
+  return http.request(
+    {
+      url: `/user/download`,
+      method: 'POST',
+    },
+    {
+      apiUrl,
+      isTransformRequestResult: false,
+      isDownload: true,
+      successMessageText: '下载成功',
     }
   );
 }

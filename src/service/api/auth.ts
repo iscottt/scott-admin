@@ -1,4 +1,4 @@
-import http from '../axios';
+import http from '../httpUtil';
 const isDev = import.meta.env.DEV;
 const apiUrl = isDev ? 'http://localhost:7345/api' : '/api';
 
