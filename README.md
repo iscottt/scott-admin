@@ -20,7 +20,7 @@
 ## 后端服务
 
 - [scott-admin-express(开发中)](https://github.com/iscottt/scott-admin-express)
-- soybean-admin-nestjs(开发中)
+- scott-admin-nestjs(开发中)
 
 ## 安装使用
 
